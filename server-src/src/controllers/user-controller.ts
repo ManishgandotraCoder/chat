@@ -3,7 +3,8 @@ import { helper } from '../helpers/response-helper';
 import { msg } from "../helpers/messages"
 import userModel from "../models/userModel";
 import jwt from "jsonwebtoken";
-import {roles} from "../helpers/roles"
+import { roles } from "../helpers/roles"
+import { values } from "../config/values"
 
 export class UserController {
   async authenticateUser(req: Request, res: Response, next: NextFunction) {
@@ -11,14 +12,16 @@ export class UserController {
       const { email, password } = req.body;
 
       const user: any = await userModel.findOne({ email, password }).select('-password');
-      var token = await jwt.sign({ _id: user._id, email: user.email, role :user.role }, 'speedytoken_speedytoken');
 
       if (user) {
+        var token = await jwt.sign({ _id: user._id, email: user.email, role: user.role }, values.TOKEN_AUTHENTICATE);
         helper.success(res, msg.RECORD_FETCHED_SUCCESSFULLY, { user, token })
       } else {
         helper.error(res, msg.NO_RECORD, {})
       }
     } catch (e) {
+      console.log("e", e);
+
       helper.server_error(res, msg.SERVER_ERROR, JSON.stringify(e))
     }
   }
@@ -77,6 +80,6 @@ export class UserController {
       helper.server_error(res, msg.SERVER_ERROR, JSON.stringify(e))
     }
   }
-  
+
 }
 

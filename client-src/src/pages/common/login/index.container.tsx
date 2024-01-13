@@ -15,10 +15,10 @@ const LoginContainerComponent = ({ submit, handleSubmit, formvalues, changeValue
                 <ul className="noBullet">
                    
                     <li>
-                        <Input value={formvalues.Email} title={'Email'} submit={submit} type={'string'} changeValues={changeValues} />
+                        <Input value={formvalues.email} title={'email'} name ={'Email ID'} submit={submit} type={'string'} changeValues={changeValues} />
                     </li>
                     <li>
-                        <Input value={formvalues.Password} title={'Password'} submit={submit} type={'password'} changeValues={changeValues} />
+                        <Input value={formvalues.password} title={'password'} name = {'Password'} submit={submit} type={'password'} changeValues={changeValues} />
                     </li>
                     
                     <li id="center-btn">

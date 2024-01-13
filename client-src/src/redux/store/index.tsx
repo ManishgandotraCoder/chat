@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux';
-// import cryptoReducers from '../reducers/crypto.reducers';
+import userReducers from '../reducers/user-reducers';
 import createSagaMiddleware from 'redux-saga';
 
 const reducer = combineReducers({
-//   crypto: cryptoReducers
+  user: userReducers
 })
 
 const sagaMiddleware = createSagaMiddleware();

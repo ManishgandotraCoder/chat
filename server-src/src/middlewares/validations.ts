@@ -25,15 +25,13 @@ export class validations {
           allErr.push(v.errors[er]["message"]);
         }
         // return res.status(400).send({ message: allErr });
-        helper.success(res, msg.INVALID, allErr)
+        helper.error(res, msg.INVALID, allErr)
       } else {
         next();
       }
     });
   }
   async userValidation(req: Request, res: Response, next: NextFunction) {
-    console.log("in");
-
     let ruleObj = {
       email: 'required|email',
       password: 'required|minLength:5',
@@ -50,7 +48,7 @@ export class validations {
           allErr.push(v.errors[er]["message"]);
         }
         // return res.status(400).send({ message: allErr });
-        helper.success(res, msg.INVALID, allErr)
+        helper.error(res, msg.INVALID, allErr)
       } else {
         next();
       }

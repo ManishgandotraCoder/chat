@@ -1,12 +1,13 @@
 import * as jwt from "passport-jwt"
 import userModel from "../models/userModel";
 import { roles } from "../helpers/roles"
+import { values } from "../config/values"
 
 const JWTStrategy = jwt.Strategy;
 const ExtractJWT = jwt.ExtractJwt;
 const opts = {
 	jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-	secretOrKey: 'speedytoken_speedytoken'
+	secretOrKey: values.TOKEN_AUTHENTICATE
 }
 export const passport = (passport: any) => {
 	passport.use(roles.admin, new JWTStrategy(opts,

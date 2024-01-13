@@ -3,5 +3,6 @@ export interface inputComponentType {
     value:any,
     changeValues: Function, 
     title:string, 
-    type:string
+    type:string,
+    name :string
 }

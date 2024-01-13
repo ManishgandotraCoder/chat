@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux"
 import { authenticate } from "../../../redux/actions/user-actions"
 const CurrencyconvertorComponentHelper = () => {
     const [formvalues, setFormvalues] = useState({
-        Email: '',
-        Password: '',
+        email: '',
+        password: '',
     })
     const [submit, setSubmit] = useState(false)
     const dispatch = useDispatch()
@@ -14,12 +14,11 @@ const CurrencyconvertorComponentHelper = () => {
         event.preventDefault();
         setSubmit(true)
         console.log(formvalues)
-        if (formvalues.Email, formvalues.Password) {
+        if (formvalues.email, formvalues.password) {
             dispatch(await authenticate(formvalues))
         }
     }
     const changeValues = (id: string, event: React.SyntheticEvent<EventTarget>) => {
-        console.log({ ...formvalues, [id]: event });
         
         setSubmit(false)
         setFormvalues({ ...formvalues, [id]: event })

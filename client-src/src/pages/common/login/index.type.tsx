@@ -1,7 +1,7 @@
 export interface registerConvertorType {
     formvalues: {
-        Email:string,
-        Password:string
+        email:string,
+        password:string
     },
     changeValues: Function,
     submit: boolean,

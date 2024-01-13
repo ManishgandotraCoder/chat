@@ -4,7 +4,7 @@ import { reducers } from "./type";
 const initialState = {
     userData: {},
 };
-const CryptoReducers = (state = initialState, action: reducers) => {
+const UserReducers = (state = initialState, action: reducers) => {
     
     switch (action.type) {
         case userTypes.default.AUTHENTICATE:
@@ -12,4 +12,4 @@ const CryptoReducers = (state = initialState, action: reducers) => {
             default: return state;
     }
 }
-export default CryptoReducers;
+export default UserReducers;

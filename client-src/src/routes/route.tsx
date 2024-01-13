@@ -4,31 +4,41 @@ const CreateuserComponent = React.lazy(() => import("../pages/admin/create-user"
 const EditUserComponent = React.lazy(() => import("../pages/admin/edit-user"));
 const ChatComponent = React.lazy(() => import("../pages/normal/chat"))
 const ViewGroupComponent = React.lazy(() => import("../pages/normal/viewgroup"));
+const roles =
+{
+    common: "COMMON",
+    admin: "ADMIN",
+    normal: "NORMAL"
+}
+
 const routes = [
     {
         path: "/",
-        element: (<LoginComponent />
-        ),
+        element: (<LoginComponent />),
+        roles: [roles.common, roles.admin, roles.normal]
     },
     {
         path: "/user/create",
-        element: (<CreateuserComponent />
-        ),
+        element: (<CreateuserComponent />),
+        roles: [roles.admin]
     },
     {
         path: "/user/edit/:id",
-        element: (<EditUserComponent />
-        ),
+        element: (<EditUserComponent />),
+        roles: [roles.admin]
+
     },
     {
         path: "/chat",
-        element: (< ChatComponent />
-        ),
+        element: (< ChatComponent />),
+        roles: [roles.normal]
+
     },
     {
         path: "/group/:id",
-        element: (<ViewGroupComponent />
-        ),
+        element: (<ViewGroupComponent />),
+        roles: [roles.normal]
+
     },
 
 ]
