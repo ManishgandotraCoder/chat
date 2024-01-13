@@ -1,4 +1,5 @@
 import * as React from "react";
+import ListGroupComponent from "../pages/normal/groups";
 
 const ListUserComponent = React.lazy(() => import("../pages/admin/list-user"));
 const CreateuserComponent = React.lazy(() => import("../pages/admin/create-user"));
@@ -35,8 +36,10 @@ const routes = [
     {
         path: "/group/:id",
         element: (<ViewGroupComponent />),
-
     },
-
+    {
+        path: "/group",
+        element: (<ListGroupComponent />),
+    },
 ]
 export default routes

@@ -1,0 +1,15 @@
+.padding {
+    padding-top: 10px;
+}
+.form {
+    margin: 50px;
+    background-color: rgb(255, 255, 255);
+    padding: 25px;
+}
+
+.add-user {
+    margin-left: 15px;
+}
+.add-group {
+    cursor: pointer;
+}
