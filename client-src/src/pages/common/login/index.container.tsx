@@ -13,7 +13,6 @@ const LoginContainerComponent = ({ submit, handleSubmit, formvalues, changeValue
             <form noValidate onSubmit={(e) => handleSubmit(e)} className="signupForm" name="signupform">
                 <h2>Login</h2>
                 <ul className="noBullet">
-                   
                     <li>
                         <Input value={formvalues.email} title={'email'} name ={'Email ID'} submit={submit} type={'string'} changeValues={changeValues} />
                     </li>

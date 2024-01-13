@@ -17,12 +17,18 @@ const CurrencyconvertorComponentHelper = () => {
     const handleSubmit = async (event: React.SyntheticEvent<EventTarget>) => {
         event.preventDefault();
         setSubmit(true)
+        console.log("formvalues", formvalues);
+        
         if (formvalues.email, formvalues.password) {
             dispatch(await authenticate(formvalues))
         }
     }
     useEffect(() => {
-        localStorage.setItem('user', JSON.stringify(user?.user))
+        if (user?.token && user?.token !== 'undefined'){
+            localStorage.setItem('user', JSON.stringify(user?.user))
+            localStorage.setItem('token',user?.token)
+        }
+        
         if (user?.user?._id && user?.user?.role === "ADMIN") {
             navigate('/user')
         }

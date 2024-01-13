@@ -1,0 +1,9 @@
+.table{
+    margin: 20px;
+    width: calc(100% - 40px);
+}
+.edit{
+    color: blue !important;
+    cursor: pointer;
+    text-decoration: underline;
+}

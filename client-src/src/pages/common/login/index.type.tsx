@@ -14,7 +14,11 @@ export interface reducersUserType {
             user :{
                 _id:string,
                 role: string
-            }
+            },
+            token: string
+        },
+        userList:{
+            data :[]
         }
     }
 }
