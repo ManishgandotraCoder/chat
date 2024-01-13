@@ -1,11 +1,12 @@
 import * as React from 'react'
 import { Routes, Route, Outlet, Link } from 'react-router-dom'
 import routes from './routes/route'
+import NotFoundComponent from './pages/common/notFound';
 const Loader = React.lazy(() => import("./components/loader"));
 
 const App: React.FunctionComponent = () => {
 
-  return (
+    return (
         <div>
             <Routes>
                 <Route path="/" element={<Layout />}>
@@ -24,24 +25,14 @@ const App: React.FunctionComponent = () => {
                 </Route>
             </Routes>
         </div>
-  )
+    )
 }
 export default App
 
 const Layout: React.FunctionComponent = () => {
-  return (<div>
-            <Outlet />
-        </div>
-  )
+    return (<div>
+        <Outlet />
+    </div>
+    )
 }
 
-const NotFoundComponent: React.FunctionComponent = () => {
-  return (
-        <div>
-            <h2>Invalid Route!</h2>
-            <p>
-                <Link to="/">Go to the home page</Link>
-            </p>
-        </div>
-  )
-}
