@@ -28,10 +28,11 @@ const EditUserContainerComponent = ({ submit, handleSubmit, formvalues, changeVa
                     <li>
                         <Input value={formvalues.password} title={'password'} name={'Password'} submit={submit} type={'password'} changeValues={changeValues} />
                     </li>
-
+                    <li>
+                        <Input value={formvalues.confirmPassword} title={'confirmPassword'} name={'Confirm Password'} submit={submit} type={'password'} changeValues={changeValues} />
+                    </li>
                     <li id="center-btn">
-                        <Button theme="outline-light" handleSubmit={handleSubmit2} title={'Cancel'} />
-                        <Button theme="outline-light" handleSubmit={handleSubmit} title={'Update'} />
+                        <Button theme="outline-light" handleSubmit={handleSubmit} title={'Add User'} />
                     </li>
 
                 </ul>

@@ -18,7 +18,6 @@ function Toolbar() {
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
             <Container>
                 <Navbar.Brand>Chat Messenger</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
 

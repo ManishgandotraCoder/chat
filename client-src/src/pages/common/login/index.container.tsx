@@ -21,7 +21,7 @@ const LoginContainerComponent = ({ submit, handleSubmit, formvalues, changeValue
                     </li>
                     
                     <li id="center-btn">
-                        <Button handleSubmit={handleSubmit} title={'Login'}/>
+                        <Button theme="outline-light" handleSubmit={handleSubmit} title={'Login'}/>
                     </li>
                     
                 </ul>

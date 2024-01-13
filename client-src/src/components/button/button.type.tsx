@@ -1,4 +1,5 @@
 export interface buttonType {
     handleSubmit: Function,
-    title: string
+    title: string,
+    theme: string
 }

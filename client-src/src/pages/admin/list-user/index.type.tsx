@@ -1,5 +1,6 @@
 export interface listType {
     list: Array<Type>;
+    handleSubmit: Function
 }
 interface Type {
     firstName: string,

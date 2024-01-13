@@ -1,7 +1,10 @@
 import React from "react"
 import { buttonType } from "./button.type"
 import './style.css'
-const Button = ({ handleSubmit , title}: buttonType) => {
-    return (<button id="join-btn" name="join" onClick={(e) => handleSubmit(e)}>{title} </button>)
+import { Button } from "react-bootstrap"
+const ButtonComponent = ({ handleSubmit, title ,theme}: buttonType) => {
+    return (
+        <Button variant={theme} onClick={(e) => handleSubmit(e)}>{title}</Button>
+    )
 }
-export default Button
+export default ButtonComponent
