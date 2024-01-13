@@ -1,36 +1,16 @@
-body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-repeat: no-repeat;
+.padding {
+  padding-top: 10px;
 }
 
-.signupSection {
-  background-repeat: no-repeat;
-  position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 800px;
-  height: 500px;
-  text-align: center;
-  display: flex;
-  color: white;
-  box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, .5);
+.form {
+  margin-top: 50px;
+  margin-left: 200px;
+  margin-bottom: 50px;
+  margin-right: 200px;
+  background-color: rgb(255, 255, 255);
+  padding: 50px;
 }
 
-.signupForm {
-  width: 100%;
-  padding: 30px 0;
-  background: rgba(20, 40, 40, .8);
-  transition: .2s;
-
-  h2 {
-    font-weight: 300;
-  }
-}
-
-.noBullet {
-  list-style-type: none;
-  padding: 0;
+.add-user {
+  margin-left: 15px;
 }

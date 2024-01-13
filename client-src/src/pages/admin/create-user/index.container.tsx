@@ -12,7 +12,7 @@ const EditUserContainerComponent = ({ submit, handleSubmit, formvalues, changeVa
     return (
         <>
                <form noValidate onSubmit={(e) => handleSubmit(e)} className="form">
-                <h3 className="add-user">Add User</h3>
+                <h3 className="add-user">Edit User</h3>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6 padding">
