@@ -18,13 +18,13 @@ function ListUserComponentHelper({list}: listType) {
         </tr>
       </thead>
       <tbody>
-        {list && list.map((item:any) => <tr>
-          <td>{item.firstName}</td>
-          <td>{item.lastName}</td>
-          <td>{item.email}</td>
-          <td>{item.phone}</td>
-          <td>{item.role}</td>
-          <td className="edit" onClick={()=>navigate(`/user/edit/${item.email}`)}>Edit</td>
+        {list && list.map((item:any) => <tr key={item._id}>
+          <td >{item.firstName}</td>
+          <td >{item.lastName}</td>
+          <td >{item.email}</td>
+          <td >{item.phone}</td>
+          <td >{item.role}</td>
+          <td  className="edit" onClick={()=>navigate(`/user/edit/${item._id}`)}>Edit</td>
 
         </tr>)}
 

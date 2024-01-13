@@ -22,3 +22,27 @@ export const listUser = async () => {
         payload: response
     }
 }
+
+export const getUserById = async (id:string) => {
+    const response = await userApi.getUserById(id)
+    return {
+        type: userTypes.GET_USER_BY_ID,
+        payload: response
+    }
+}
+
+export const editUser = async (id:string, params :{email:string,password:string,firstName:string, lastName:string, phone:string}) => {
+    const response = await userApi.editUser(id, params)
+    return {
+        type: userTypes.EDIT_USER,
+        payload: response
+    }
+}
+
+export const createUser = async (params :{email:string,password:string,firstName:string, lastName:string, phone:string}) => {
+    const response = await userApi.createUser(params)
+    return {
+        type: userTypes.CREATE_USER,
+        payload: response
+    }
+}

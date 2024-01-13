@@ -4,5 +4,5 @@ export const userTypes ={
     CREATE_USER:"CREATE_USER",
     EDIT_USER:"EDIT_USER",
     LIST_USER:"LIST_USER",
-
+    GET_USER_BY_ID:"GET_USER_BY_ID"
 }

@@ -64,8 +64,8 @@ export class validations {
     }
   }
   async notExists (req: Request, res: Response, next: NextFunction) {
-    const { email } = req.params;
-    const user = await userModel.findOne({ email });
+    const { _id } = req.params;
+    const user = await userModel.findOne({ _id });
     if (user) {
       next();
     } else {

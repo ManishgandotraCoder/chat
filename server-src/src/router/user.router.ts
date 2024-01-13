@@ -21,11 +21,15 @@ userrouter.post('/user',
 
 userrouter.get('/user',
     passport.authenticate(roles.common, { session: false }),
-    data.rules.userExists,
     controller.user.getUsers
 )
 
-userrouter.put('/user/:email',
+userrouter.get('/user/:_id',
+    passport.authenticate(roles.common, { session: false }),
+    controller.user.getUserById
+)
+
+userrouter.put('/user/:_id',
     passport.authenticate(roles.admin, { session: false }),
     data.rules.userValidation,
     data.rules.notExists,

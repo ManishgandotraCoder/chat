@@ -20,8 +20,6 @@ export class UserController {
         helper.error(res, msg.NO_RECORD, {})
       }
     } catch (e) {
-      console.log("e", e);
-
       helper.server_error(res, msg.SERVER_ERROR, JSON.stringify(e))
     }
   }
@@ -58,21 +56,33 @@ export class UserController {
       helper.server_error(res, msg.SERVER_ERROR, JSON.stringify(e))
     }
   }
+  async getUserById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const user: any = await userModel.findOne({ _id: req.params._id }).select('-password');
+      if (user) {
+        helper.success(res, msg.RECORD_FETCHED_SUCCESSFULLY, user)
+      } else {
+        helper.error(res, msg.NO_RECORD, {})
+      }
+    } catch (e) {
+      helper.server_error(res, msg.SERVER_ERROR, JSON.stringify(e))
+    }
+  }
   async updateUser(req: Request, res: Response, next: NextFunction) {
     try {
-      const { email } = req.params
-
+      
       const user: any = await userModel
-        .findOneAndUpdate({ email },
+        .findOneAndUpdate({ _id: req.params._id },
           {
             email: req.body.email,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            phone: req.body.phone
+            phone: req.body.phone,
+            password:req.body.password
           })
         .select('-password');
-      if (user) {
-        helper.success(res, msg.RECORD_UPDATED_SUCCESSFULLY, {})
+        if (user) {
+        helper.success(res, msg.RECORD_UPDATED_SUCCESSFULLY, user)
       } else {
         helper.error(res, msg.NO_RECORD, {})
       }

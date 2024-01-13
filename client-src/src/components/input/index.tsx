@@ -5,7 +5,7 @@ const Input = ({ submit, value, changeValues, title, type, name }: inputComponen
     return (<>
         <label ></label>
         <input type={type} className="inputFields" placeholder={name} required={submit} value={value} onChange={(e) => changeValues(title, e.target.value)} /><br/>
-        { submit && !value && <span className="error">Please select valid {title}</span> }
+        { submit && !value && <span className="error">Please select valid {name}</span> }
     </>
 
     )

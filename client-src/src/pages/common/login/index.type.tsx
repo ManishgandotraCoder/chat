@@ -19,6 +19,13 @@ export interface reducersUserType {
         },
         userList:{
             data :[]
+        },
+        profileInfo: {
+            firstName:string,
+            lastName :string,
+            email:string,
+            password :string, 
+            phone :string
         }
     }
 }

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { authenticate } from "../../../redux/actions/user-actions"
 import { reducersUserType } from "./index.type"
 import { useNavigate } from "react-router-dom"
-const CurrencyconvertorComponentHelper = () => {
+const LoginComponentHelper = () => {
     const navigate = useNavigate()
     const [formvalues, setFormvalues] = useState({
         email: '',
@@ -17,7 +17,6 @@ const CurrencyconvertorComponentHelper = () => {
     const handleSubmit = async (event: React.SyntheticEvent<EventTarget>) => {
         event.preventDefault();
         setSubmit(true)
-        console.log("formvalues", formvalues);
         
         if (formvalues.email, formvalues.password) {
             dispatch(await authenticate(formvalues))
@@ -48,4 +47,4 @@ const CurrencyconvertorComponentHelper = () => {
         formvalues={formvalues}
         changeValues={changeValues} />)
 }
-export default CurrencyconvertorComponentHelper
+export default LoginComponentHelper
