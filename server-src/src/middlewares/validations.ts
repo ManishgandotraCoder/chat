@@ -3,6 +3,7 @@ import { Response, Request, NextFunction } from "express";
 import { helper } from '../helpers/response-helper';
 import { msg } from "../helpers/messages"
 import userModel from '../models/userModel';
+import groupModel from '../models/groupModel';
 
 /** 
  * Middleware validation class
@@ -70,6 +71,15 @@ export class validations {
       next();
     } else {
       helper.error(res, msg.USER_DOESNOT_EXISTS, {})
+    }
+  }
+  async groupExists(req: Request, res: Response, next: NextFunction) {
+    const { name } = req.body;
+    const user = await groupModel.findOne({ name });
+    if (user) {
+      helper.error(res, msg.GROUP_ALREADY_EXISTS, {})
+    } else {
+      next()
     }
   }
 }

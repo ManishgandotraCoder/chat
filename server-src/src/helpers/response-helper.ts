@@ -18,7 +18,7 @@ import {status} from "./status"
     return res.status(status.SERVER_ERROR).json({
       status:status.SERVER_ERROR,
       message: message,
-      body: null
+      body: resData
     });
   }
 

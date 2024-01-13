@@ -8,5 +8,6 @@ export const msg = {
     RECORD_UPDATED_SUCCESSFULLY: "Record updated successfully",
     USER_DOESNOT_EXISTS:"User doesnot exists",
     NOT_AUTHORIZED:"You are not authorized to access this API",
-    USER_LOGGED_IN:"User loggedin successfully"
+    USER_LOGGED_IN:"User loggedin successfully",
+    GROUP_ALREADY_EXISTS: "Group Already Exists",
 }
