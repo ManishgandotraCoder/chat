@@ -2,13 +2,17 @@ import * as React from 'react'
 import { Routes, Route, Outlet, Link } from 'react-router-dom'
 import routes from './routes/route'
 import NotFoundComponent from './pages/common/notFound';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const Loader = React.lazy(() => import("./components/loader"));
+const Toolbar = React.lazy(() => import("./components/toolbar"));
+const LoginComponent = React.lazy(() => import("./pages/common/login"));
 
 const App: React.FunctionComponent = () => {
-
     return (
         <div>
             <Routes>
+                <Route path="/" element={<LoginComponent />} />
                 <Route path="/" element={<Layout />}>
                     {routes.map(item =>
                         <Route
@@ -30,7 +34,9 @@ const App: React.FunctionComponent = () => {
 export default App
 
 const Layout: React.FunctionComponent = () => {
+
     return (<div>
+        <Toolbar />
         <Outlet />
     </div>
     )

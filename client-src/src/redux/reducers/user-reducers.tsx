@@ -1,15 +1,17 @@
-import * as userTypes from "../constants/user-types"
+import { userTypes } from "../constants/user-types"
 import { reducers } from "./type";
 
 const initialState = {
     userData: {},
 };
 const UserReducers = (state = initialState, action: reducers) => {
-    
+
     switch (action.type) {
-        case userTypes.default.AUTHENTICATE:
+        case userTypes.AUTHENTICATE:
             return { ...state, userData: action.payload };
-            default: return state;
+        case userTypes.RESET_STORE:
+            return initialState
+        default: return state;
     }
 }
 export default UserReducers;

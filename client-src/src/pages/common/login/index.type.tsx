@@ -8,3 +8,13 @@ export interface registerConvertorType {
     handleSubmit: Function,
 
 }
+export interface reducersUserType {
+    user:{
+        userData :{
+            user :{
+                _id:string,
+                role: string
+            }
+        }
+    }
+}
