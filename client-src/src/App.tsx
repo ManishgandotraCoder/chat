@@ -3,7 +3,8 @@ import { Routes, Route, Outlet, Link } from 'react-router-dom'
 import routes from './routes/route'
 import NotFoundComponent from './pages/common/notFound';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import './App.css'
+import background from "./icons/bg.jpg";
 const Loader = React.lazy(() => import("./components/loader"));
 const Toolbar = React.lazy(() => import("./components/toolbar"));
 const LoginComponent = React.lazy(() => import("./pages/common/login"));
@@ -11,6 +12,7 @@ const LoginComponent = React.lazy(() => import("./pages/common/login"));
 const App: React.FunctionComponent = () => {
     return (
         <div>
+
             <Routes>
                 <Route path="/" element={<LoginComponent />} />
                 <Route path="/" element={<Layout />}>
@@ -28,6 +30,7 @@ const App: React.FunctionComponent = () => {
                     <Route path="*" element={<NotFoundComponent />} />
                 </Route>
             </Routes>
+
         </div>
     )
 }
@@ -35,7 +38,7 @@ export default App
 
 const Layout: React.FunctionComponent = () => {
 
-    return (<div>
+    return (<div className='bg'>
         <Toolbar />
         <Outlet />
     </div>

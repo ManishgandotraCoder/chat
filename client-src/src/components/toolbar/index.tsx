@@ -15,7 +15,7 @@ function Toolbar() {
         navigate('/')
     }
     return (
-        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+        <Navbar collapseOnSelect expand="lg" style={{background:"rgba(10, 180, 180, 1)"}}>
             <Container>
                 <Navbar.Brand>Chat Messenger</Navbar.Brand>
                 <Navbar.Collapse id="responsive-navbar-nav">

@@ -24,7 +24,7 @@ const EditUserComponent = () => {
             formvalues.password &&
             formvalues.firstName &&
             formvalues.lastName &&
-            formvalues.confirmPassword &&
+            formvalues.confirmPassword === formvalues.password  &&
             formvalues.phone) {
                 dispatch(await createUser(formvalues))
                 navigate('/user')
