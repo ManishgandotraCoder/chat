@@ -1,5 +1,6 @@
 import React from "react"
-const ViewGroupComponent = () => {
-    return(<>ViewGroupComponent</>)
+import ViewGroupContainer from "./index-container"
+const ViewGroup = () => {
+    return (<ViewGroupContainer/>)
 }
-export default ViewGroupComponent
+export default ViewGroup

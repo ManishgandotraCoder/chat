@@ -30,9 +30,6 @@ function Toolbar({ logout, heading, background }: toolbarType) {
                         {logout && <Nav.Link eventKey={2} onClick={() => logout_app()}>
                             Logout
                         </Nav.Link>}
-                        {!logout && <Nav.Link eventKey={3} >
-                            Actions
-                        </Nav.Link>}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -4,11 +4,13 @@ import React, { useState } from 'react'
 import { chatType } from './index.type';
 import Toolbar from '../../../components/toolbar';
 import { useSearchParams } from 'react-router-dom';
+import ViewGroup from '../viewgroup';
+import MessageComponent from '../messages';
 
 
 const ChatContainerHelper = ({ changeValues, accordianList }: chatType) => {
     const [searchParams, setSearchParams] = useSearchParams();
-
+    const [chat, setChat] = useState(true)
     const [add, setAdd] = useState(false);
     const [active, setActive] = useState('')
     const setActiveState = (name: any) => {
@@ -29,16 +31,15 @@ const ChatContainerHelper = ({ changeValues, accordianList }: chatType) => {
                         {accordianList.map((item: any) => <ListGroup.Item
                             active={item.name === active}
                             as="li"
-
+                            onClick={() => setActiveState(item)}
                             className="d-flex justify-content-between align-items-start"
                         >
-                            <div className="ms-2 me-auto" onClick={() => setActiveState(item)}>
+                            <div className="ms-2 me-auto" >
                                 <div className="fw-bold">{item.name}</div>
                                 {item.members.length} members
                             </div>
-                            {/* <Badge bg="primary" pill>
-                                14
-                            </Badge> */}
+                            <span className='eye' onClick={()=>setChat(!chat)}>👁</span>
+
                         </ListGroup.Item>)}
 
                     </ListGroup>
@@ -47,6 +48,8 @@ const ChatContainerHelper = ({ changeValues, accordianList }: chatType) => {
                     <div className='border'>
                         <Toolbar logout={false} heading={active} background="#FFF" />
                         <div className='chatbg'>
+                            {chat && <MessageComponent /> || <ViewGroup />}
+
 
                         </div>
                     </div>

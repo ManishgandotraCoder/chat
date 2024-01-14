@@ -5,9 +5,8 @@ const groupSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
     max: 50,
-    unique:true
+    unique: true
   },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
@@ -19,7 +18,7 @@ const groupSchema = new mongoose.Schema({
     default: new Date(),
   },
   members: [{
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: 'Users'},
   }]
 });
 

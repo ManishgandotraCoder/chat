@@ -6,10 +6,16 @@ import { data } from "../middlewares"
 import passport from "passport";
 import { roles } from "../helpers/roles"
 
+grouprouter.get('/members/:group',
+    passport.authenticate(roles.normal, { session: false }),
+    controller.group.getNonGroupMembers
+)
+
 grouprouter.get('/',
     passport.authenticate(roles.normal, { session: false }),
     controller.group.getGroups
 )
+
 grouprouter.post('/',
     passport.authenticate(roles.normal, { session: false }),
     data.rules.groupExists,
@@ -22,5 +28,9 @@ grouprouter.put('/:id',
 grouprouter.delete('/:id',
     passport.authenticate(roles.normal, { session: false }),
     controller.group.deleteGroup
+)
+grouprouter.get('/:id',
+    passport.authenticate(roles.normal, { session: false }),
+    controller.group.getGroup
 )
 
