@@ -2,30 +2,37 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useNavigate } from 'react-router-dom';
-import { logout } from "../../redux/actions/user-actions"
+import { logoutChats } from "../../redux/actions/user-actions"
 import { useDispatch } from 'react-redux';
-function Toolbar() {
+import { toolbarType } from './toolbar.type';
+function Toolbar({ logout, heading, background }: toolbarType) {
+
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const logout_app = async () => {
-        // 
-        dispatch(await logout())
+        dispatch(await logoutChats())
         localStorage.clear();
         navigate('/')
     }
+    const groupDetails = ( id:string)=>{
+
+    }
     return (
-        <Navbar collapseOnSelect expand="lg" style={{background:"rgba(10, 180, 180, 1)"}}>
+        <Navbar collapseOnSelect expand="lg" style={{ background: background }}>
             <Container>
-                <Navbar.Brand>Chat Messenger</Navbar.Brand>
+                <Navbar.Brand onClick={()=> groupDetails('')}>{heading ? heading :"Select Chat"}</Navbar.Brand>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
 
                     </Nav>
                     <Nav>
-                        <Nav.Link eventKey={2} onClick={() => logout_app()}>
+                        {logout && <Nav.Link eventKey={2} onClick={() => logout_app()}>
                             Logout
-                        </Nav.Link>
+                        </Nav.Link>}
+                        {!logout && <Nav.Link eventKey={3} >
+                            Actions
+                        </Nav.Link>}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -9,7 +9,7 @@ export const authenticate = async (params: {email:string,password:string}) => {
     }
 }
 
-export const logout = async () => {
+export const logoutChats = async () => {
     return {
         type: userTypes.RESET_STORE,
     }

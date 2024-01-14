@@ -1,32 +1,54 @@
-import { Form, InputGroup, ListGroup } from 'react-bootstrap'
+import { Badge, Form, InputGroup, ListGroup } from 'react-bootstrap'
 import './style.css'
 import React, { useState } from 'react'
 import { chatType } from './index.type';
-const Input = React.lazy(() => import("../../../components/input"));
+import Toolbar from '../../../components/toolbar';
+import { useSearchParams } from 'react-router-dom';
 
-const ChatContainerHelper = ({ changeValues }: chatType) => {
+
+const ChatContainerHelper = ({ changeValues, accordianList }: chatType) => {
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const [add, setAdd] = useState(false);
-    const [groupName, setGroupname] = useState('')
+    const [active, setActive] = useState('')
+    const setActiveState = (name: any) => {
+        setActive(name.name)
+        setSearchParams({ id: name._id, name: name.name })
+    }
     return (<>
         <form noValidate className="form">
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-3">
-                        <ListGroup>
-                            <ListGroup.Item className='add-group'>
-                                {add ? <InputGroup className="mb-3">
-                                    <Form.Control aria-label="Dollar amount (with dot and two decimal places)" />
-                                    <InputGroup.Text onClick={() => setAdd(!add)}>Save</InputGroup.Text>
-                                </InputGroup>
-                                    : <span onClick={() => setAdd(!add)}>Add Groups</span>}
-                            </ListGroup.Item>
-                            <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                            <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                            <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-                        </ListGroup>
-                    </div>
-                    <div className="col-md-9 ">
+            <div className="row">
+                <div className="col-md-3">
 
+                    <ListGroup >
+                        <ListGroup.Item>{add ? <InputGroup className="mb-3">
+                            <Form.Control aria-label="Dollar amount (with dot and two decimal places)" />
+                            <InputGroup.Text onClick={() => setAdd(!add)}>Save</InputGroup.Text>
+                        </InputGroup>
+                            : <span onClick={() => setAdd(!add)}>Add Groups</span>}</ListGroup.Item>
+                        {accordianList.map((item: any) => <ListGroup.Item
+                            active={item.name === active}
+                            as="li"
+
+                            className="d-flex justify-content-between align-items-start"
+                        >
+                            <div className="ms-2 me-auto" onClick={() => setActiveState(item)}>
+                                <div className="fw-bold">{item.name}</div>
+                                {item.members.length} members
+                            </div>
+                            {/* <Badge bg="primary" pill>
+                                14
+                            </Badge> */}
+                        </ListGroup.Item>)}
+
+                    </ListGroup>
+                </div>
+                <div className="col-md-9 ">
+                    <div className='border'>
+                        <Toolbar logout={false} heading={active} background="#FFF" />
+                        <div className='chatbg'>
+
+                        </div>
                     </div>
                 </div>
             </div>

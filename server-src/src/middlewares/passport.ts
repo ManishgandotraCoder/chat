@@ -21,6 +21,8 @@ export const passport = (passport: any) => {
 	));
 	passport.use(roles.normal, new JWTStrategy(opts,
 		async function (jwt_payload, done) {
+			console.log("in::  ", jwt_payload);
+			
 			const getUser = await userModel.findOne({ email: jwt_payload.email, role: roles.normal });
 			if (getUser) {
 				return done(null, getUser);

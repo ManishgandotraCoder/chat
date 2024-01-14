@@ -1,8 +1,9 @@
 .padding {
     padding-top: 10px;
 }
+
 .form {
-    margin: 50px;
+    margin: 20px;
     background-color: rgb(255, 255, 255);
     padding: 25px;
 }
@@ -10,6 +11,27 @@
 .add-user {
     margin-left: 15px;
 }
+
 .add-group {
     cursor: pointer;
+}
+
+.border {
+    border: 1px solid grey;
+}
+
+.list-group-item.active:hover {
+    background-color: rgba(10, 180, 180, 1);
+    border-color: rgba(10, 180, 180, 1);
+}
+
+.list-group-item.active,
+.list-group-item.active:hover {
+    background-color: rgba(10, 180, 180, 1);
+    border-color: rgba(10, 180, 180, 1);
+}
+
+.chatbg {
+    background-color: rgb(225, 243, 243);
+    height: 70vh;
 }

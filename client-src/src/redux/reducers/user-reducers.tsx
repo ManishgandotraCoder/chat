@@ -25,6 +25,3 @@ const UserReducers = (state = initialState, action: reducers) => {
     }
 }
 export default UserReducers;
-
-
-
