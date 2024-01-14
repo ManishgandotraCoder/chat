@@ -6,5 +6,5 @@ import {chatrouter}  from "../router/chat.router";
 import { grouprouter } from "../router/group.router";
 
 routes.use('/', userrouter);
-routes.use('/chat', chatrouter);
+routes.use('/messages', chatrouter);
 routes.use('/group', grouprouter);

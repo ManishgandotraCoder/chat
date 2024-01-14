@@ -32,7 +32,7 @@ const ViewGroupContainer = ({ heading, groupMembers, nongroupMembers }: { headin
                                         <div className="fw-bold">{item.userId.firstName} {item.userId.lastName}</div>
                                         {item.userId.email}
                                     </div>
-                                    <Badge bg="primary" pill onClick={()=> updateMembers('rem', item.userId._id)}>
+                                    <Badge bg="primary" pill onClick={()=> updateMembers('rem', item.userId?._id)}>
                                         Remove Member
                                     </Badge>
                                 </ListGroup.Item>
@@ -51,7 +51,7 @@ const ViewGroupContainer = ({ heading, groupMembers, nongroupMembers }: { headin
                                         <div className="fw-bold">{item.firstName} {item.lastName}</div>
                                         {item.email}
                                     </div>
-                                    <Badge bg="primary" pill onClick={()=> updateMembers('add', item._id)}>
+                                    <Badge bg="primary" pill onClick={()=> updateMembers('add', item?._id)}>
                                         Add Member
                                     </Badge>
                                 </ListGroup.Item>

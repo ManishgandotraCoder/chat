@@ -15,8 +15,9 @@ const ChatContainerHelper = ({ changeValues, accordianList }: chatType) => {
     const [active, setActive] = useState('')
     const setActiveState = (name: any) => {
         setActive(name.name)
-        setSearchParams({ id: name._id, name: name.name })
+        setSearchParams({ id: name?._id, name: name.name })
     }
+    
     return (<>
         <form noValidate className="form">
             <div className="row">

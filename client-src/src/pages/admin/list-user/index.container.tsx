@@ -26,13 +26,13 @@ function ListUserComponentHelper({ list, handleSubmit }: listType) {
             </tr>
           </thead>
           <tbody>
-            {list && list.map((item: any) => <tr key={item._id}>
+            {list && list.map((item: any) => <tr key={item?._id}>
               <td >{item.firstName}</td>
               <td >{item.lastName}</td>
               <td >{item.email}</td>
               <td >{item.phone}</td>
               <td >{item.role}</td>
-              <td className="edit" onClick={() => navigate(`/user/edit/${item._id}`)}>Edit</td>
+              <td className="edit" onClick={() => navigate(`/user/edit/${item?._id}`)}>Edit</td>
 
             </tr>)}
 

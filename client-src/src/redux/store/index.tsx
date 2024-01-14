@@ -3,10 +3,12 @@ import { combineReducers } from 'redux';
 import userReducers from '../reducers/user-reducers';
 import createSagaMiddleware from 'redux-saga';
 import groupReducers from '../reducers/group-reducers';
+import chatReducers from '../reducers/chat-reducers';
 
 const reducer = combineReducers({
   user: userReducers,
-  group: groupReducers
+  group: groupReducers,
+  message :chatReducers
 })
 
 const sagaMiddleware = createSagaMiddleware();

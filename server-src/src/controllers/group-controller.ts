@@ -31,7 +31,7 @@ export class GroupController {
             const group: any = await groupModel.create({
                 createdBy: groupInfo._id,
                 name: name,
-                members: [{ userId: groupInfo._id }]
+                members: [{ userId: groupInfo?._id }]
             })
             if (group) {
                 helper.success(res, msg.RECORD_CREATED_SUCCESSFULLY, group)

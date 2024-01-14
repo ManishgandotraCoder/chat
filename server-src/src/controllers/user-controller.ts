@@ -10,10 +10,12 @@ export class UserController {
   async authenticateUser(req: Request, res: Response, next: NextFunction) {
     try {
       const { email, password } = req.body;
+      console.log({ email,password});
+      
       const user: any = await userModel.findOne({ email,password}).select('-password')
       
       if (user) {
-        var token = await jwt.sign({ _id: user._id, email: user.email, role: user.role }, values.TOKEN_AUTHENTICATE);
+        var token = await jwt.sign({ _id: user?._id, email: user.email, role: user.role }, values.TOKEN_AUTHENTICATE);
         helper.success(res, msg.USER_LOGGED_IN, { user, token })
       } else {
         helper.error(res, msg.NO_RECORD, {})

@@ -7,8 +7,12 @@ import passport from "passport";
 import { roles } from "../helpers/roles"
 
 
-chatrouter.get('/friends',
+chatrouter.post('/addmsg',
     passport.authenticate(roles.normal, { session: false }),
-    controller.user.createUser
+    controller.message.addMessage
 )
 
+chatrouter.post('/getmsg',
+    passport.authenticate(roles.normal, { session: false }),
+    controller.message.getMessages
+)

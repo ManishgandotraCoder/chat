@@ -1,5 +1,7 @@
 import * as React from "react";
 import ListGroupComponent from "../pages/normal/groups";
+import MessageComponentContainer from "../pages/normal/messages/index-container";
+import ChatContainer from "../pages/normal/messages";
 
 const ListUserComponent = React.lazy(() => import("../pages/admin/list-user"));
 const CreateuserComponent = React.lazy(() => import("../pages/admin/create-user"));
