@@ -46,9 +46,8 @@ const ChatContainerHelper = ({ changeValues, accordianList }: chatType) => {
                 </div>
                 <div className="col-md-9 ">
                     <div className='border'>
-                        <Toolbar logout={false} heading={active} background="#FFF" />
                         <div className='chatbg'>
-                            {chat && <MessageComponent /> || <ViewGroup />}
+                            {chat && <MessageComponent /> || <ViewGroup heading={active}  />}
 
 
                         </div>

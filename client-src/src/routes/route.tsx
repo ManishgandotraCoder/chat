@@ -34,10 +34,6 @@ const routes = [
 
     },
     {
-        path: "/group/:id",
-        element: (<ViewGroupComponent />),
-    },
-    {
         path: "/group",
         element: (<ListGroupComponent />),
     },
