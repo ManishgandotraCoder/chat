@@ -5,10 +5,10 @@ import './style.css'
 import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessages, sendMessage } from "../../../redux/actions/chat-actions";
+import moment from "moment"
 
 
-
-export default function MessageComponent({  socket, id }: any) {
+export default function MessageComponent({ socket, id }: any) {
   const scrollRef: any = useRef();
   const dispatch = useDispatch()
   const [arrivalMessage, setArrivalMessage] = useState({ fromSelf: false, message: '' });
@@ -68,21 +68,27 @@ export default function MessageComponent({  socket, id }: any) {
   return (
     <>
       <div className="chat-back">
-        {messages.map((message: any) => {
-
-          return (
-            <div ref={scrollRef} key={uuidv4()}>
-              <div
-                className={`message ${message.fromSelf ? "sended" : "recieved"
-                  }`}
-              >
-                <div className="content ">
-                  <p>{message.message}</p>
-                </div>
+        {messages.map((message: any) =>
+          <>
+            {message.fromSelf ? 
+            
+            <div className="message sag mtLine">
+              <div className="messageText" data-time={moment(message.time).format('HH:MM:SS')}>
+                {message.message}
               </div>
-            </div>
-          );
-        })}
+              <div className="resim" ></div>
+            </div> 
+            : <div className="message sol">
+              <div className="resim" >
+                </div>
+                <div className="messageText" data-time={moment(message.time).format('HH:MM:SS')}>
+                {message.message}
+              </div>
+            </div>}
+
+
+          </>
+        )}
       </div>
 
       <ChatInput handleSendMsg={handleSendMsg} />
