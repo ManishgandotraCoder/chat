@@ -3,8 +3,6 @@ import { chatTypes } from "../constants/chat-types"
 
 export const getMessages = async (params: any) => {
     const response: any = await chatApi.getMessages(params)
-    console.log("response", response);
-    
     return {
         type: chatTypes.GET_MESSAGES,
         payload: response?.data

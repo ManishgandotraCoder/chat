@@ -10,4 +10,5 @@ export const msg = {
     NOT_AUTHORIZED:"You are not authorized to access this API",
     USER_LOGGED_IN:"User loggedin successfully",
     GROUP_ALREADY_EXISTS: "Group Already Exists",
+    INVALID_CREDENTIALS:"Invalid Credentials"
 }

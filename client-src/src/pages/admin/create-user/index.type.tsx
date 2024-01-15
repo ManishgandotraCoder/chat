@@ -2,6 +2,7 @@ export interface editUserType {
     submit:boolean,
     handleSubmit: Function,
     handleSubmit2: Function,
+    message: string,
     formvalues :{
         email:string,
         password:string,

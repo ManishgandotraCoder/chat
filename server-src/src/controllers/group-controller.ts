@@ -105,7 +105,6 @@ export class GroupController {
 
             const group: any = await groupModel.findOne({ _id: groupInfo.group })
             if (group && group.members) {
-                console.log(group.members);
                 let memberList = group.members.map((item: any) => item.userId)
                 const user: any = await userModel.find({ _id: { $nin: memberList }, role: "NORMAL" })
                 helper.success(res, msg.RECORD_FETCHED_SUCCESSFULLY, user)

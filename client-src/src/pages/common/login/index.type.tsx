@@ -1,7 +1,8 @@
 export interface registerConvertorType {
+    message: string,
     formvalues: {
-        email:string,
-        password:string
+        email: string,
+        password: string
     },
     changeValues: Function,
     submit: boolean,
@@ -9,23 +10,23 @@ export interface registerConvertorType {
 
 }
 export interface reducersUserType {
-    user:{
-        userData :{
-            user :{
-                _id:string,
-                role: string
-            },
+    user: {
+        token: string,
+        messageLoggedIn: string,
+        userData: {
+            _id: string,
+            role: string
             token: string
         },
-        userList:{
-            data :[]
+        userList: {
+            data: []
         },
         profileInfo: {
-            firstName:string,
-            lastName :string,
-            email:string,
-            password :string, 
-            phone :string
+            firstName: string,
+            lastName: string,
+            email: string,
+            password: string,
+            phone: string
         }
     }
 }

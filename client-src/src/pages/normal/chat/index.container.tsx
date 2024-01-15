@@ -1,23 +1,29 @@
 import { Badge, Form, InputGroup, ListGroup } from 'react-bootstrap'
 import './style.css'
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { chatType } from './index.type';
-import Toolbar from '../../../components/toolbar';
 import { useSearchParams } from 'react-router-dom';
 import ViewGroup from '../viewgroup';
 import MessageComponent from '../messages';
-
+import { io } from "socket.io-client";
+export const host = "http://localhost:5000";
 
 const ChatContainerHelper = ({ changeValues, accordianList }: chatType) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [chat, setChat] = useState(true)
     const [add, setAdd] = useState(false);
     const [active, setActive] = useState('')
+    const socket: any = useRef();
     const setActiveState = (name: any) => {
         setActive(name.name)
         setSearchParams({ id: name?._id, name: name.name })
     }
-    
+    useEffect(() => {
+        if (searchParams.get('id')) {
+            socket.current = io(host);
+            socket.current.emit("add-user", searchParams.get('id'));
+        }
+    }, [searchParams.get('id')]);
     return (<>
         <form noValidate className="form">
             <div className="row">
@@ -39,7 +45,7 @@ const ChatContainerHelper = ({ changeValues, accordianList }: chatType) => {
                                 <div className="fw-bold">{item.name}</div>
                                 {item.members.length} members
                             </div>
-                            <span className='eye' onClick={()=>setChat(!chat)}>👁</span>
+                            <span className='eye' onClick={() => setChat(!chat)}>👁</span>
 
                         </ListGroup.Item>)}
 
@@ -48,7 +54,7 @@ const ChatContainerHelper = ({ changeValues, accordianList }: chatType) => {
                 <div className="col-md-9 ">
                     <div className='border'>
                         <div className='chatbg'>
-                            {chat && <MessageComponent /> || <ViewGroup heading={active}  />}
+                            {chat && <MessageComponent socket={socket} id={searchParams.get("id")} /> || <ViewGroup heading={active} />}
 
 
                         </div>

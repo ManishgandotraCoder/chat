@@ -7,7 +7,7 @@ function _helperaxios(url: string, params: any, method: string) {
     return axios({
         method: method,
         headers: {
-            'Authorization': 'Bearer ' +token 
+            'Authorization': 'Bearer ' + token
         },
         url: API + url,
         data: params
@@ -16,7 +16,7 @@ function _helperaxios(url: string, params: any, method: string) {
             return resp(response?.data?.body, response?.data?.status, response?.data?.message);
         })
         .catch((reason: any) => {
-            return resp([], reason?.response?.status, reason?.response?.data)
+            return resp([], reason?.response?.data?.status, reason?.response?.data?.message)
         })
 
 }

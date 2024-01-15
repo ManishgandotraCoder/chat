@@ -1,6 +1,14 @@
 export interface reducers{
     type:string,
     payload: {
-        data: {}
+        data: {
+            user: {},
+            token: string
+        },
+        message :{
+            message :string
+        },
+        
     }
+    
 }

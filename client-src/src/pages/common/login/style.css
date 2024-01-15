@@ -2,21 +2,19 @@
   padding-top: 10px;
 }
 
-.form {
+.form-login {
   margin-left: 200px;
-  margin-bottom: 50px;
   margin-right: 200px;
-
   background-color: rgb(255, 255, 255);
   padding: 50px;
-
 }
 
-.bg {
+.bg2 {
   background-image: url('../../../icons/bg.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  padding-top: 10%;
   height: 100%;
 }
 

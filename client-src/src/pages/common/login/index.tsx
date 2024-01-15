@@ -12,29 +12,41 @@ const LoginComponentHelper = () => {
     })
     const [submit, setSubmit] = useState(false)
     const dispatch = useDispatch()
-    const user = useSelector((item: reducersUserType) => item?.user?.userData)
+    const user = useSelector((item: reducersUserType) => item?.user)
 
     const handleSubmit = async (event: React.SyntheticEvent<EventTarget>) => {
         event.preventDefault();
         setSubmit(true)
-        
+
         if (formvalues.email, formvalues.password) {
             dispatch(await authenticate(formvalues))
+
         }
     }
+
     useEffect(() => {
-        if (user?.token && user?.token !== 'undefined'){
-            localStorage.setItem('user', JSON.stringify(user?.user))
-            localStorage.setItem('token',user?.token)
+    }, [user?.messageLoggedIn])
+    useEffect(() => {
+        if (user?.messageLoggedIn === 'User loggedin successfully') {
+            localStorage.setItem('user', JSON.stringify(user?.userData))
+            localStorage.setItem('token', user?.token)
         }
-        
-        if (user?.user?._id && user?.user?.role === "ADMIN") {
+        if (localStorage.getItem('user')) {
+            let data = JSON.parse(localStorage.getItem('user')!);
+            if (data.role === "ADMIN") {
+                navigate('/user')
+            }
+            if (data.role === "NORMAL") {
+                navigate('/chat')
+            }
+        }
+        if (user?.userData?._id && user?.userData?.role === "ADMIN") {
             navigate('/user')
         }
-        if (user?.user?._id && user?.user?.role === "NORMAL") {
+        if (user?.userData?._id && user?.userData?.role === "NORMAL") {
             navigate('/chat')
         }
-    }, [user?.user?._id])
+    }, [user?.userData?._id])
     const changeValues = (id: string, event: React.SyntheticEvent<EventTarget>) => {
 
         setSubmit(false)
@@ -45,6 +57,7 @@ const LoginComponentHelper = () => {
         handleSubmit={(e: React.SyntheticEvent<EventTarget>) => handleSubmit(e)}
         submit={submit}
         formvalues={formvalues}
+        message ={user?.messageLoggedIn}
         changeValues={changeValues} />)
 }
 export default LoginComponentHelper

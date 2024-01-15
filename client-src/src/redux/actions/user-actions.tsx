@@ -5,7 +5,7 @@ export const authenticate = async (params: {email:string,password:string}) => {
     const response :any= await userApi.authenticate(params)
     return {
         type: userTypes.AUTHENTICATE,
-        payload: response?.data
+        payload: response
     }
 }
 

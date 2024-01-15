@@ -4,13 +4,13 @@ import { registerConvertorType } from "./index.type"
 const Input = React.lazy(() => import("../../../components/input"));
 const Button = React.lazy(() => import("../../../components/button"));
 
-const LoginContainerComponent = ({ submit, handleSubmit, formvalues, changeValues }: registerConvertorType) => {
+const LoginContainerComponent = ({ submit, handleSubmit, formvalues, changeValues, message }: registerConvertorType) => {
 
 
     return (
-            <div className="bg">
-                <form noValidate onSubmit={(e) => handleSubmit(e)} className="form">
-                <h3 className="add-user">Edit User</h3>
+        <div className="bg2">
+            <form noValidate onSubmit={(e) => handleSubmit(e)} className="form-login">
+                <h3 className="add-user">Login</h3>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 padding">
@@ -20,17 +20,20 @@ const LoginContainerComponent = ({ submit, handleSubmit, formvalues, changeValue
                             <Input value={formvalues.password} title={'password'} name={'Password'} submit={submit} type={'password'} changeValues={changeValues} />
                         </div>
                         <div className="col-md-12 padding">
-                        <Button theme="outline-dark" handleSubmit={handleSubmit} title={'Login'} />
-                        </div> 
-                        {/* <div id="center-btn">
-                            */}
+                            {message}
+                        </div>
+                        <div className="col-md-12 padding">
+                            <Button theme="outline-dark" handleSubmit={handleSubmit} title={'Login'} />
+                        </div>
+
+                        
                     </div>
 
                 </div>
 
             </form>
-            </div>
-            
+        </div>
+
     );
 }
 

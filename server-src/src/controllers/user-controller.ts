@@ -10,15 +10,13 @@ export class UserController {
   async authenticateUser(req: Request, res: Response, next: NextFunction) {
     try {
       const { email, password } = req.body;
-      console.log({ email,password});
-      
-      const user: any = await userModel.findOne({ email,password}).select('-password')
-      
+      const user: any = await userModel.findOne({ email, password }).select('-password')
+
       if (user) {
         var token = await jwt.sign({ _id: user?._id, email: user.email, role: user.role }, values.TOKEN_AUTHENTICATE);
         helper.success(res, msg.USER_LOGGED_IN, { user, token })
       } else {
-        helper.error(res, msg.NO_RECORD, {})
+        helper.error(res, msg.INVALID_CREDENTIALS, {})
       }
     } catch (e) {
       helper.server_error(res, msg.SERVER_ERROR, JSON.stringify(e))
@@ -71,7 +69,7 @@ export class UserController {
   }
   async updateUser(req: Request, res: Response, next: NextFunction) {
     try {
-      
+
       const user: any = await userModel
         .findOneAndUpdate({ _id: req.params._id },
           {
@@ -79,10 +77,10 @@ export class UserController {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             phone: req.body.phone,
-            password:req.body.password
+            password: req.body.password
           })
         .select('-password');
-        if (user) {
+      if (user) {
         helper.success(res, msg.RECORD_UPDATED_SUCCESSFULLY, user)
       } else {
         helper.error(res, msg.NO_RECORD, {})
