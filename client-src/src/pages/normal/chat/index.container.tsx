@@ -7,6 +7,7 @@ import ViewGroup from '../viewgroup';
 import { io } from "socket.io-client";
 import { useDispatch } from 'react-redux';
 import { getGroups, saveGroupInfo } from '../../../redux/actions/group-actions';
+import MessageComponent from '../messages';
 export const host = "http://localhost:5000";
 
 const ChatContainerHelper = ({ accordianList, callGroups }: chatType) => {
@@ -71,8 +72,8 @@ const ChatContainerHelper = ({ accordianList, callGroups }: chatType) => {
                 <div className="col-md-9 ">
                     <div className='border'>
                         <div className='chatbg'>
-                            {!chat &&
-                                // <MessageComponent socket={socket} id={searchParams.get("id")} /> ||
+                            {chat &&
+                                <MessageComponent socket={socket} id={searchParams.get("id")} /> ||
                                 <ViewGroup callGroups={callGroups}/>}
 
 

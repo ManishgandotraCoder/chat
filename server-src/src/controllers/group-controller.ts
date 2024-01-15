@@ -9,8 +9,7 @@ export class GroupController {
         try {
             const groupInfo: any = req.user
             const user: any = await groupModel
-                // .find({ 'members.userId': groupInfo._id })
-                .find({})
+                .find({ 'members.userId': groupInfo._id })
                 .populate('members.userId', ' firstName lastName');
 
             if (user) {

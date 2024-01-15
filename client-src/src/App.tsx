@@ -38,7 +38,7 @@ export default App
 const Layout: React.FunctionComponent = () => {
 
     return (<div className='bg'>
-        <Toolbar logout = {true} heading = {'Chat Messenger'} background="rgba(10, 180, 180, 1)"/>
+        <Toolbar logout = {true} heading = {'Speedster'} background="rgba(10, 180, 180, 1)"/>
         <Outlet />
     </div>
     )
