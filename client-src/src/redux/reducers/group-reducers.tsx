@@ -17,7 +17,8 @@ const groupReducers = (state = initialState, action: reducers) => {
             return { ...state, groupInfo: action.payload };
         case groupTypes.UPDATE_GROUP:
             return { ...state, updateGroup: action.payload };
-            
+        case groupTypes.SAVE_GROUP:
+                return { ...state, saveGroup: action.payload };
         default: return state;
     }
 }

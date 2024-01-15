@@ -1,3 +1,31 @@
-.cards {
-    left-margin: 20px;
+
+.badge {
+    cursor: pointer;
+}
+
+.list-group{
+    max-height: calc(70vh - 80px);
+    margin-bottom: 10px;
+    overflow-y:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.button {
+    float: right
+}
+.lister {
+    margin-left: 20px;
+    margin-right: 20px;
+
+}
+.col-text {
+    background-color: white;
+    padding: 5px;
+    width: 70%;
+    border-radius: 3px;
+    margin-left: 33px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+
+    margin-right: 33px;
+
 }

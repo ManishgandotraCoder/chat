@@ -29,3 +29,10 @@ export const updateGroup = async (groupId: string,type: string, id: string) => {
         payload: response?.data
     }
 }
+export const saveGroupInfo = async (name: string) => {
+    const response: any = await groupApi.saveGroup(name)
+    return {
+        type: groupTypes.SAVE_GROUP,
+        payload: response?.data
+    }
+}
