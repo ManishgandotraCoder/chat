@@ -14,10 +14,10 @@ const LoginContainerComponent = ({ submit, handleSubmit, formvalues, changeValue
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 padding">
-                            <Input value={formvalues.email} title={'email'} name={'Email ID'} submit={submit} type={'string'} changeValues={changeValues} />
+                            <Input min={0} value={formvalues.email} title={'email'} name={'Email ID'} submit={submit} required={true} type={'string'} changeValues={changeValues} />
                         </div>
                         <div className="col-md-12 padding">
-                            <Input value={formvalues.password} title={'password'} name={'Password'} submit={submit} type={'password'} changeValues={changeValues} />
+                            <Input min={5} value={formvalues.password} title={'password'} name={'Password'} submit={submit} required={true} type={'password'} changeValues={changeValues} />
                         </div>
                         <div className="col-md-12 padding">
                             {message}

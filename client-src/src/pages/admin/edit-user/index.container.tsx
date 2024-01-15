@@ -12,24 +12,24 @@ const EditUserContainerComponent = ({ submit, handleSubmit, formvalues, changeVa
             <div className="container">
                 <div className="row">
                     <div className="col-md-6 padding">
-                        <Input value={formvalues.firstName} title={'firstName'} name={'First Name'} submit={submit} type={'string'} changeValues={changeValues} />
+                        <Input min={3} value={formvalues.firstName} title={'firstName'} name={'First Name'} submit={submit} required={true} type={'string'} changeValues={changeValues} />
                     </div>
                     <div className="col-md-6 padding">
-                        <Input value={formvalues.lastName} title={'lastName'} name={'Last Name'} submit={submit} type={'string'} changeValues={changeValues} />
-
-                    </div>
-
-                    <div className="col-md-6 padding">
-                        <Input value={formvalues.email} title={'email'} name={'Email ID'} submit={submit} type={'email'} changeValues={changeValues} />
+                        <Input min={3} value={formvalues.lastName} title={'lastName'} name={'Last Name'} submit={submit} required={true} type={'string'} changeValues={changeValues} />
 
                     </div>
 
                     <div className="col-md-6 padding">
-                        <Input value={formvalues.phone} title={'phone'} name={'Contact Number'} submit={submit} type={'number'} changeValues={changeValues} />
+                        <Input min={0} value={formvalues.email} title={'email'} name={'Email ID'} submit={submit} required={true} type={'email'} changeValues={changeValues} />
+
+                    </div>
+
+                    <div className="col-md-6 padding">
+                        <Input min={10} value={formvalues.phone} title={'phone'} name={'Contact Number'} submit={submit} required={true} type={'number'} changeValues={changeValues} />
 
                     </div>
                     <div className="col-md-6 padding">
-                        <Input value={formvalues.password} title={'password'} name={'Password'} submit={submit} type={'password'} changeValues={changeValues} />
+                        <Input min={5} value={formvalues.password} title={'password'} name={'Password'} submit={submit} required={true} type={'password'} changeValues={changeValues} />
 
                     </div>
                     <div className="col-md-12 padding">

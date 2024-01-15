@@ -4,5 +4,7 @@ export interface inputComponentType {
     changeValues: Function, 
     title:string, 
     type:string,
-    name :string
+    name :string,
+    min:number,
+    required: boolean
 }

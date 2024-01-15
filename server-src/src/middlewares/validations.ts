@@ -49,7 +49,6 @@ export class validations {
         for (let er in v.errors) {
           allErr.push(v.errors[er]["message"]);
         }
-        console.log("allErr", allErr);
         // return res.status(400).send({ message: allErr });
         helper.error(res, msg.INVALID, allErr)
       } else {

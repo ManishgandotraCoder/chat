@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    max: 50,
   },
   password: {
     type: String,
@@ -22,12 +21,13 @@ const userSchema = new mongoose.Schema({
   lastName: {
     type: String,
     required: true,
-    min: 8,
+    min: 3,
   },
   phone: {
     type: String,
     required: true,
     min: 10,
+    max: 10
   },
   role: {
     type: String,
