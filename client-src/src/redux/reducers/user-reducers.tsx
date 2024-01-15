@@ -21,8 +21,6 @@ const UserReducers = (state = initialState, action: reducers) => {
         case userTypes.EDIT_USER:
             return { ...state, profileInfo: action.payload , updateMessage: action.payload.message};
         case userTypes.CREATE_USER:
-            console.log(action.payload, );
-            
             return { ...state, profileInfo: action.payload , createMessage: action.payload.message};
         case userTypes.RESET_STORE:
             return initialState

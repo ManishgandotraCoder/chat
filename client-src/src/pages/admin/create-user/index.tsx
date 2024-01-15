@@ -5,8 +5,6 @@ import { createUser } from "../../../redux/actions/user-actions"
 import { useNavigate, useParams } from "react-router-dom"
 const EditUserComponent = () => {
     const user = useSelector((item: any) => (item.user))
-    console.log(user.createMessage);
-
     const navigate = useNavigate()
     const [message, setMessage] = useState('')
     const [formvalues, setFormvalues] = useState({
