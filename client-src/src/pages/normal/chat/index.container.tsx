@@ -4,19 +4,18 @@ import React, { useEffect, useRef, useState } from 'react'
 import { chatType } from './index.type';
 import { useSearchParams } from 'react-router-dom';
 import ViewGroup from '../viewgroup';
-import MessageComponent from '../messages';
 import { io } from "socket.io-client";
 import { useDispatch } from 'react-redux';
-import { saveGroupInfo } from '../../../redux/actions/group-actions';
+import { getGroups, saveGroupInfo } from '../../../redux/actions/group-actions';
 export const host = "http://localhost:5000";
 
-const ChatContainerHelper = ({ changeValues, accordianList }: chatType) => {
+const ChatContainerHelper = ({ accordianList, callGroups }: chatType) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [chat, setChat] = useState(true);
     const [group, setGroup] = useState('')
     const [add, setAdd] = useState(false);
     const [active, setActive] = useState('')
-    const dispatch= useDispatch()
+    const dispatch = useDispatch()
     const socket: any = useRef();
     const setActiveState = (name: any) => {
         setActive(name.name)
@@ -28,37 +27,30 @@ const ChatContainerHelper = ({ changeValues, accordianList }: chatType) => {
             socket.current.emit("add-user", searchParams.get('id'));
         }
     }, [searchParams.get('id')]);
-    const saveGroup = async() =>{
-        console.log(group);
-        
-        // setAdd(!add)
+    const saveGroup = async () => {
         dispatch(await saveGroupInfo(group))
+        dispatch(await getGroups())
+
     }
     return (<>
         <form noValidate className="form">
             <div className="row">
                 <div className="col-md-3">
-
                     <ListGroup >
-
-
                         <ListGroup.Item
                             as="li"
                             className="d-flex justify-content-between align-items-start">
                             {add ? <InputGroup className="mb-3">
-                                <Form.Control 
-                                value ={group}
-                                onChange={(e:any)=> setGroup(e.target.value)}
-                                placeholder='Enter group name' />
+                                <Form.Control
+                                    value={group}
+                                    onChange={(e: any) => setGroup(e.target.value)}
+                                    placeholder='Enter group name' />
                                 <InputGroup.Text onClick={() => saveGroup()}><span className="add-group" >Save</span></InputGroup.Text>
                             </InputGroup>
                                 : <span className="add-group" onClick={() => setAdd(!add)}>Add Groups</span>
 
                             }
                         </ListGroup.Item>
-
-
-
                         {accordianList.map((item: any) =>
                             <ListGroup.Item
                                 active={item.name === active}
@@ -79,9 +71,9 @@ const ChatContainerHelper = ({ changeValues, accordianList }: chatType) => {
                 <div className="col-md-9 ">
                     <div className='border'>
                         <div className='chatbg'>
-                            {chat &&
-                                <MessageComponent socket={socket} id={searchParams.get("id")} /> ||
-                                <ViewGroup heading={active} />}
+                            {!chat &&
+                                // <MessageComponent socket={socket} id={searchParams.get("id")} /> ||
+                                <ViewGroup callGroups={callGroups}/>}
 
 
                         </div>

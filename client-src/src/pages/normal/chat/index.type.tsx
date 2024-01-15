@@ -1,4 +1,4 @@
 export interface chatType {
-    changeValues: Function,
-    accordianList: []
+    accordianList: [],
+    callGroups: Function
 }

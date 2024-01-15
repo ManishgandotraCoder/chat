@@ -9,12 +9,10 @@ const ChatComponent = () => {
     const getGroupData = async () => {
         dispatch(await getGroups())
     }
+   
     useEffect(() => {
         getGroupData()
     },[])
-    const changeValues = () => {
-        
-    }
-    return (<ChatContainerHelper changeValues={changeValues} accordianList ={group.groupList} />)
+    return (<ChatContainerHelper accordianList ={group.groupList} callGroups={getGroupData}/>)
 }
 export default ChatComponent

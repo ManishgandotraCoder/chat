@@ -10,8 +10,23 @@
     -webkit-overflow-scrolling: touch;
 }
 .button {
-    float: right
+    float: right;
+    border: transparent;
+    outline: transparent;
+    color: white;
+    background-color: red;
+    border-radius: 5px;
 }
+
+.button-green {
+    float: right;
+    border-radius: 5px;
+    border: transparent;
+    outline: transparent;
+    color: white;
+    background-color: rgb(14, 241, 165);
+}
+
 .lister {
     margin-left: 20px;
     margin-right: 20px;
