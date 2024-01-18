@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import ChatContainerHelper from "./index.container"
+import ChatContainer from "./index.container"
 import { useDispatch, useSelector } from "react-redux"
 import { getGroups } from "../../../redux/actions/group-actions"
 const ChatComponent = () => {
@@ -13,6 +13,6 @@ const ChatComponent = () => {
     useEffect(() => {
         getGroupData()
     },[])
-    return (<ChatContainerHelper accordianList ={group.groupList} callGroups={getGroupData}/>)
+    return (<ChatContainer accordianList ={group.groupList} callGroups={getGroupData}/>)
 }
 export default ChatComponent

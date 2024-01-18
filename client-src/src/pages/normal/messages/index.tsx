@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import ChatInput from "./ChatInput";
-import { v4 as uuidv4 } from "uuid";
 import './style.css'
 import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMessages, sendMessage } from "../../../redux/actions/chat-actions";
 import moment from "moment"
-
+import InputGroup from 'react-bootstrap/InputGroup';
+import { IoMdSend } from "react-icons/io";
+import Form from 'react-bootstrap/Form';
 
 export default function MessageComponent({ socket, id }: any) {
   const scrollRef: any = useRef();
@@ -15,10 +15,19 @@ export default function MessageComponent({ socket, id }: any) {
   const [searchParams, setSearchParams] = useSearchParams();
   const messagesData = useSelector((item: any) => item.message)
   const [messages, setMessages] = useState([]);
+  const [msg, setMsg] = useState("");
 
   const getData = async () => {
     dispatch(await getMessages({ group: searchParams.get("id") }))
   }
+
+  useEffect(() => {
+    socket.current?.on("recieve", (msg: any) => {
+      console.log("in");
+      
+      setArrivalMessage({ fromSelf: false, message: msg });
+    });
+  }, []); 
   useEffect(() => {
     getData()
   }, [id])
@@ -52,11 +61,7 @@ export default function MessageComponent({ socket, id }: any) {
     setMessages(msgs);
   };
 
-  useEffect(() => {
-    socket.current?.on("msg-recieve", (msg: any) => {
-      setArrivalMessage({ fromSelf: false, message: msg });
-    });
-  }, []);
+  
 
   useEffect(() => {
     arrivalMessage && setMessages((prev): any => [...prev, arrivalMessage]);
@@ -65,6 +70,15 @@ export default function MessageComponent({ socket, id }: any) {
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+
+  const sendChat = (event:any) => {
+    event.preventDefault();
+    if (msg.length > 0) {
+      handleSendMsg(msg);
+      setMsg("");
+    }
+  };
+  
   return (
     <>
       <div className="chat-back">
@@ -91,7 +105,21 @@ export default function MessageComponent({ socket, id }: any) {
         )}
       </div>
 
-      <ChatInput handleSendMsg={handleSendMsg} />
+      <InputGroup className="mb-3">
+        <Form.Control
+          placeholder="Type your message"
+          aria-label="Recipient's username"
+          aria-describedby="basic-addon2"
+          type="text"
+          value={msg}
+          onChange={(e)=>setMsg(e.target.value)}
+            />
+        <InputGroup.Text id="basic-addon2">
+        <button type="submit" onClick={(event) => sendChat(event)}>
+          <IoMdSend />
+        </button>
+        </InputGroup.Text>
+      </InputGroup>
     </>
   );
 }

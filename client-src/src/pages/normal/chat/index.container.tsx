@@ -10,7 +10,7 @@ import { getGroups, saveGroupInfo } from '../../../redux/actions/group-actions';
 import MessageComponent from '../messages';
 export const host = "http://localhost:5000";
 
-const ChatContainerHelper = ({ accordianList, callGroups }: chatType) => {
+const ChatContainer = ({ accordianList, callGroups }: chatType) => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [chat, setChat] = useState(true);
     const [group, setGroup] = useState('')
@@ -85,4 +85,4 @@ const ChatContainerHelper = ({ accordianList, callGroups }: chatType) => {
 
     </>)
 }
-export default ChatContainerHelper
+export default ChatContainer

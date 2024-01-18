@@ -68,7 +68,7 @@ io.on("connection", (socket: any) => {
     
     if (sendUserSocket) {
       
-      socket.to(sendUserSocket).emit("msg-recieve", data.msg);
+      socket.to(sendUserSocket).emit("recieve", data.msg);
     }
   });
 
