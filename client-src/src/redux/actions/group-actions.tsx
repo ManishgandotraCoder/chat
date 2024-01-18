@@ -1,8 +1,8 @@
 import * as groupApi from "../apis/group-apis"
 import { groupTypes } from "../constants/group-types"
 
-export const getGroups = async () => {
-    const response: any = await groupApi.getGroups()
+export const getGroups = async (search:string) => {
+    const response: any = await groupApi.getGroups(search)
     return {
         type: groupTypes.GET_GROUP,
         payload: response?.data
@@ -33,6 +33,13 @@ export const saveGroupInfo = async (name: string) => {
     const response: any = await groupApi.saveGroup(name)
     return {
         type: groupTypes.SAVE_GROUP,
+        payload: response?.data
+    }
+}
+export const deleteGroup = async (groupId: string) => {
+    const response: any = await groupApi.deleteGroup(groupId)
+    return {
+        type: groupTypes.UPDATE_GROUP,
         payload: response?.data
     }
 }

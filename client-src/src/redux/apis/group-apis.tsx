@@ -1,7 +1,7 @@
 import _helperaxios from "../../config/axios.helper"
 
-function getGroups() {
-    return _helperaxios('/group', {}, 'GET')
+function getGroups(search:string) {
+    return _helperaxios(`/group?search=${search}`, {}, 'GET')
 }
 function getGroupById(id: string) {
     return _helperaxios(`/group/${id}`, {}, 'GET')
@@ -20,10 +20,14 @@ function saveGroup(name: string) {
         "name": name,
     }, 'POST')
 }
+function deleteGroup(groupId: string) {
+    return _helperaxios(`/group/${groupId}`, {}, 'DELETE')
+}
 export {
     getGroups,
     getGroupById,
     nonGroupMembers,
     updateGroup,
-    saveGroup
+    saveGroup,
+    deleteGroup
 }

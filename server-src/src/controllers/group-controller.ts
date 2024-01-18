@@ -7,9 +7,17 @@ import userModel from '../models/userModel';
 export class GroupController {
     async getGroups(req: Request, res: Response, next: NextFunction) {
         try {
+            let search = req.query.search
             const groupInfo: any = req.user
+            let filter: any = { 'members.userId': groupInfo._id }
+            if (search) {
+                filter.name = { '$regex': search ? search : '', '$options': 'i' }
+
+            }
+            console.log(filter);
+
             const user: any = await groupModel
-                .find({ 'members.userId': groupInfo._id })
+                .find(filter)
                 .populate('members.userId', ' firstName lastName');
 
             if (user) {

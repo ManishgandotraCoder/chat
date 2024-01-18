@@ -4,14 +4,13 @@ import { useDispatch, useSelector } from "react-redux"
 import { getGroups } from "../../../redux/actions/group-actions"
 const ChatComponent = () => {
     const group = useSelector((item:any) => item.group)
-    
     const dispatch = useDispatch()
-    const getGroupData = async () => {
-        dispatch(await getGroups())
+    const getGroupData = async (e:any) => {
+        dispatch(await getGroups(e))
     }
    
     useEffect(() => {
-        getGroupData()
+        getGroupData('')
     },[])
     return (<ChatContainer accordianList ={group.groupList} callGroups={getGroupData}/>)
 }
