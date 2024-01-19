@@ -89,6 +89,6 @@ export class UserController {
       helper.server_error(res, msg.SERVER_ERROR, JSON.stringify(e))
     }
   }
-
+ 
 }
 

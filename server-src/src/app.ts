@@ -54,29 +54,16 @@ io.on("connection", (socket: any) => {
 
   chatSocket = socket;
   socket.on("add-user", (userId: any) => {
-    console.log(userId);
-    
     onlineUsers.set(userId, socket.id);
   });
 
   socket.on("send-msg", (data: any) => {
-    console.log("inner ", data);
-    
-    // io.emit("msg-recieve", data.msg);
     const sendUserSocket = onlineUsers.get(data.group);
-    console.log("sendUserSocket", onlineUsers);
-    
     if (sendUserSocket) {
-      
       socket.to(sendUserSocket).emit("recieve", data.msg);
     }
   });
-
-
 });
-
-
-
 process.on('uncaughtException', function (err) {
   console.log("Error", err)
 })

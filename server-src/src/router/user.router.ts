@@ -35,3 +35,4 @@ userrouter.put('/user/:_id',
     data.rules.notExists,
     controller.user.updateUser
 )
+
