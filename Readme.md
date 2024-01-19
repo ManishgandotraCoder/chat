@@ -48,3 +48,30 @@
         2. Run npm test 
 
 Code will start running its all test cases 
+
+# Task 
+
+Technical Assignment Task:
+Build a simple application which provides web services to facilitate group chat and manage data.
+Admin APIs (only admin can add users)
+- Manage Users (create user, edit user)
+Any User (normal user, admin user) –
+Authentication APIs (login, logout)
+Groups (Normal User) –
+Manage groups (create, delete, search and add members, etc). All users are visible to all users.
+Group Messages (Normal User)
+- Send messages in group
+- Likes message, etc
+Build simple e2e functional tests with python/nodejs to prove APIs are
+working.
+Requirements
+– Use database of your choice
+
+# As per this task following things are implemented 
+
+1. Real time group chat Web Application with Normal users 
+2. User data is managed from Admin, Operation like Add , edit , View users are available for user login
+3. For normal / admin user Login/ Logout functionality is created 
+4. For normal user Group creation/ deletion/ Search / Add functionality is given 
+5. Real time message view functionality is created 
+6. All test cases are written in node js for API testing 
