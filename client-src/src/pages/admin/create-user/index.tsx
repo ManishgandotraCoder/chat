@@ -17,7 +17,7 @@ const EditUserComponent = () => {
     })
     useEffect(() => {
         setMessage(user.createMessage)
-        if (user.createMessage === 'User Created successfully') {
+        if (user.createMessage === 'Record Created successfully') {
             navigate('/user')
         }
     }, [user.createMessage])

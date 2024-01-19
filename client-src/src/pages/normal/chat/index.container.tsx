@@ -38,7 +38,8 @@ const ChatContainer = ({ accordianList, callGroups }: chatType) => {
     const saveGroup = async () => {
         dispatch(await saveGroupInfo(group))
         dispatch(await getGroups(''))
-
+        setAdd(!add)
+        setGroup('')
     }
     const onSearchChange = async (e: string) => {
         setSearch(e)
