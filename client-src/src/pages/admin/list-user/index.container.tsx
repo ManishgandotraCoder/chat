@@ -10,9 +10,9 @@ function ListUserComponentHelper({ list, handleSubmit }: listType) {
   const navigate = useNavigate()
   return (
     <form noValidate onSubmit={(e) => handleSubmit(e)} className="form-list">
-      <h3 className="add-user">Add User</h3>
+      <h3 className="add-user">Add User      <Button theme="outline-dark" handleSubmit={handleSubmit} title={'Add User'} /></h3>
       <div className="container">
-      <Button theme="outline-dark" handleSubmit={handleSubmit} title={'Add User'} />
+      
         <Table striped bordered hover >
           <thead>
             <tr>

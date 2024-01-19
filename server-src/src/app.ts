@@ -60,7 +60,9 @@ io.on("connection", (socket: any) => {
   socket.on("send-msg", (data: any) => {
     const sendUserSocket = onlineUsers.get(data.group);
     if (sendUserSocket) {
-      socket.to(sendUserSocket).emit("recieve", data.msg);
+      console.log("Error", data.msg)
+
+      socket.emit("recieve", data.msg);
     }
   });
 });
