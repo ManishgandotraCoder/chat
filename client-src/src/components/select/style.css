@@ -4,7 +4,7 @@
     padding: 10px;
     cursor: pointer;
     width: 310px;
-    border: 1px solid rgba(10, 180, 180, 1);
+    border: 1px solid rgba(176, 54, 247);;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -27,11 +27,11 @@
 }
 
 option {
-    background-color: rgba(10, 180, 180, 1);
+    background-color: rgba(176, 54, 247);;
     cursor: pointer;
 
     &:hover {
-        color: rgba(10, 180, 180, 1);
+        color: rgba(176, 54, 247);;
         background-color: white;
         cursor: pointer;
     }

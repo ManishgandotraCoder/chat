@@ -36,9 +36,14 @@ const App: React.FunctionComponent = () => {
 export default App
 
 const Layout: React.FunctionComponent = () => {
+    const [role, setRole] = React.useState('NORMAL')
+    React.useEffect(() => {
+        let user = localStorage.getItem('user') || ''
+        setRole(JSON.parse(user).role);
 
+    }, [])
     return (<div className='bg'>
-        <Toolbar logout = {true} heading = {'Speedster'} background="rgba(10, 180, 180, 1)"/>
+        {role === "admin" && <Toolbar logout={true} heading={'Speedster'} background="rgba(176, 54, 247);" />}
         <Outlet />
     </div>
     )
