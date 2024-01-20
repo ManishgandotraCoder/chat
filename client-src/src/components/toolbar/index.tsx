@@ -6,9 +6,15 @@ import { logoutChats } from "../../redux/actions/user-actions"
 import { useDispatch } from 'react-redux';
 import { toolbarType } from './toolbar.type';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { useEffect, useState } from 'react';
 
 function Toolbar({ logout, heading, background }: toolbarType) {
-
+    const [role, setRole]= useState('NORMAL')
+    useEffect(()=>{
+        let user = localStorage.getItem('user') || ''
+        setRole(JSON.parse(user).role);
+        
+    },[])
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -26,7 +32,7 @@ function Toolbar({ logout, heading, background }: toolbarType) {
 
                 <Navbar.Brand onClick={() => groupDetails('')}>{heading ? heading : "Select Chat"}</Navbar.Brand>
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav className="me-auto">
+                   {role === "ADMIN" && <Nav className="me-auto">
                         <Nav.Link eventKey={2} onClick={() => navigate('/dashboard')}>
                             Dashboard
                         </Nav.Link>
@@ -34,7 +40,9 @@ function Toolbar({ logout, heading, background }: toolbarType) {
                             <NavDropdown.Item onClick={() => navigate('/users')}>Users</NavDropdown.Item>
                            
                         </NavDropdown>
-                    </Nav>
+                    </Nav>  || <Nav className="me-auto">
+                        
+                    </Nav> } 
                     <Nav>
                         {logout && <Nav.Link eventKey={3} >
                             Welcome {(JSON.parse(localStorage.getItem('user')!)).firstName} {(JSON.parse(localStorage.getItem('user')!)).lastName}
