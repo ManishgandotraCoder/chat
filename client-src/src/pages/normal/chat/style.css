@@ -1,280 +1,297 @@
-.padding {
-  padding-top: 10px;
+html, body {margin: 0; height: 100%; overflow: hidden}
+.footer {
+    background-color: rgb(229, 206, 243);
+    position: fixed;
+    width: calc(100% - 40px);
+    padding: 10px;
+    color: white;
+    font-size: 25px;
+    bottom: 20px;
+}   
+
+.chat {
+    padding: 20px;
 }
 
-.form {
-  margin-left: 30px;
-  margin-right: 30px;
-  background-color: rgb(255, 255, 255);
-  padding: 25px;
+.ht {
+    height: 88.6vh;
+    background-color: white;
 }
 
-.add-user {
-  margin-left: 15px;
+.col-text {
+    background-color: white;
+    padding: 5px;
+    width: 85%;
+    border-radius: 3px;
+    margin-left: 13px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+
+    margin-right: 13px;
+
 }
-
-.add-group {
-  cursor: pointer;
-}
-
-.border {
-  border: 1px solid grey;
-}
-
-.list-group-item.active:hover {
-  background-color: rgba(176, 54, 247);
-  ;
-  border-color: rgba(176, 54, 247);
-  ;
-}
-
-.list-group-item.active,
-.list-group-item.active:hover {
-  background-color: rgb(176, 54, 247);
-  ;
-  border-color: rgba(176, 54, 247);
-  ;
-}
-
-.chatbg {
-  height: 85vh;
-}
-
-.eye {
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.add-group {
-  cursor: pointer;
-}
-
-
-.recieved {
-  max-width: 40%;
-  overflow-wrap: break-word;
-  background: #E8B600;
-  max-width: 50%;
-  min-width: 150px;
-  /* padding: 2px; */
-  margin-left: 10px;
-  margin-bottom: 5px;
-  border-radius: 2px;
-  color: #00498D;
-}
-
-.sended {
-  justify-content: flex-end;
-
-  .content {
-    padding-left: 10px;
-    max-width: 40%;
-    color: #E8B600;
-    margin-left: auto;
-    margin-right: 10px;
-    overflow-wrap: break-word;
-    padding-right: 10px;
-    border-radius: 6px;
-
-    background-color: #00498D;
-  }
-}
-
-.chat-back {
-  padding-top: 20px;
-  height: 80%;
-  overflow-y: scroll
-}
-
-
 
 .time {
-  text-align: center;
-  margin-bottom: 10px;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .time span {
-  background-color: #000000;
-  display: inline-block;
-  border-radius: 3px;
-  text-align: center;
-  padding: 2px 20px;
-  color: #fff;
-  opacity: 0.3;
+    background-color: #000000;
+    display: inline-block;
+    border-radius: 3px;
+    text-align: center;
+    padding: 2px 20px;
+    color: #fff;
+    opacity: 0.3;
 }
 
 .message {
-  margin-bottom: 10px;
-}
-
-.message .messageText {
-  text-align: left;
-  color: #FFFFFF;
+    margin-bottom: 10px;
 }
 
 .message.sol {
-  text-align: left;
+    text-align: left;
 }
 
 .message.sag {
-  text-align: right;
+    text-align: right;
 }
 
-.message .resim {
-  background: rgba(176, 54, 247) none no-repeat center;
-  vertical-align: text-top;
-  background-size: cover;
-  display: inline-block;
-  position: relative;
-  color: #FFFFFF;
-  height: 40px;
-  width: 40px;
-}
+/* .message .resim {
+    background: rgba(176, 54, 247) none no-repeat center;
+    vertical-align: text-top;
+    background-size: cover;
+    display: inline-block;
+    position: relative;
+    color: #FFFFFF;
+    height: 40px;
+    width: 40px;
+} */
 
 .message .messageText {
-  background-color: rgba(176, 54, 247);
-  ;
-  vertical-align: text-top;
-  display: inline-block;
-  position: relative;
-  line-height: 20px;
-  max-width: 165px;
-  color: #FFFFFF;
-  padding: 10px;
+    background-color: rgba(176, 54, 247);
+    ;
+    vertical-align: text-top;
+    display: inline-block;
+    position: relative;
+    line-height: 20px;
+    max-width: 80%;
+    color: #FFFFFF;
+    padding: 10px;
 }
 
 .message.left .userPortrait,
 .message.sag .messageText {
-  border-radius: 5px 0 0 5px;
+    border-radius: 5px 0 0 5px;
 }
 
 .message.sag .userPortrait,
 .message.sol .messageText {
-  border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
 }
 
 .message.mtLine.sol .messageText {
-  border-radius: 0 5px 5px 0;
+    border-radius: 0 5px 5px 0;
 }
 
 .message.mtLine.sag .messageText {
-  border-radius: 5px 0 0 5px;
+    border-radius: 5px 0 0 5px;
 }
 
 .message .messageText:before {
-  border-color: transparent rgba(176, 54, 247);
-  ;
-  border-style: solid;
-  position: absolute;
-  border-width: 0;
-  display: block;
-  content: "";
-  z-index: 1;
+    border-color: transparent rgba(176, 54, 247);
+    ;
+    border-style: solid;
+    position: absolute;
+    border-width: 0;
+    display: block;
+    content: "";
+    z-index: 1;
 }
 
 .message.sol .messageText:before {
-  border-width: 0 10px 10px 0;
-  left: -10px;
-  top: 0;
+    border-width: 0 10px 10px 0;
+    left: -10px;
+    top: 0;
 }
 
 .message.sag .messageText:before {
-  border-width: 10px 0 0 10px;
-  right: -10px;
-  top: 30px;
+    border-width: 10px 0 0 10px;
+    right: -10px;
+    top: 30px;
 }
 
 .message .messageText:after {
-  content: attr(data-time);
-  color: rgba(103, 101, 101, 0.912);
-  position: absolute;
-  line-height: 20px;
-  display: block;
-  bottom: 2px;
-  z-index: 1;
-  font-size: 13px;
+    content: attr(data-time);
+    color: rgba(103, 101, 101, 0.912);
+    position: absolute;
+    line-height: 20px;
+    display: block;
+    bottom: 2px;
+    z-index: 1;
+    font-size: 13px;
 }
 
 .message.sol .messageText:after {
-  margin-left: 5px;
-  left: 100%;
+    margin-left: 5px;
+    left: 100%;
 }
 
 .message.sag .messageText:after {
-  margin-right: 5px;
-  right: 100%;
+    margin-right: 5px;
+    right: 100%;
+}
+/* received */
+
+.message .messageText-received {
+    background-color: #FFFFFF;
+    color: rgba(176, 54, 247);
+    vertical-align: text-top;
+    display: inline-block;
+    position: relative;
+    line-height: 20px;
+    max-width: 80%;
+    
+    padding: 10px;
 }
 
-.badge {
-  cursor: pointer;
+.message.left .userPortrait,
+.message.sag .messageText-received {
+    border-radius: 5px 0 0 5px;
 }
 
-.list-group {
-  max-height: calc(70vh - 80px);
-  margin-bottom: 10px;
-  overflow-y: scroll;
-  -webkit-overflow-scrolling: touch;
+.message.sag .userPortrait,
+.message.sol .messageText-received {
+    border-radius: 0 5px 5px 0;
 }
 
-.button {
-  float: right;
-  border: transparent;
-  outline: transparent;
-  color: white;
-  background-color: red;
-  border-radius: 5px;
+.message.mtLine.sol .messageText-received {
+    border-radius: 0 5px 5px 0;
 }
 
-.button-green {
-  float: right;
-  border-radius: 5px;
-  border: transparent;
-  outline: transparent;
-  color: white;
-  background-color: rgb(14, 241, 165);
+.message.mtLine.sag .messageText-received {
+    border-radius: 5px 0 0 5px;
 }
 
-.lister {
-  margin-left: 20px;
-  margin-right: 20px;
-
+.message .messageText-received:before {
+    border-color: transparent #FFF;
+    ;
+    border-style: solid;
+    position: absolute;
+    border-width: 0;
+    display: block;
+    content: "";
+    z-index: 1;
 }
 
-.col-text {
-  background-color: white;
-  padding: 5px;
-  width: 70%;
-  border-radius: 3px;
-  margin-left: 33px;
-  margin-bottom: 5px;
-  margin-top: 5px;
+.message.sol .messageText-received:before {
+    border-width: 0 10px 10px 0;
+    left: -10px;
+    top: 0;
+}
 
-  margin-right: 33px;
+.message.sag .messageText-received:before {
+    border-width: 10px 0 0 10px;
+    right: -10px;
+    top: 30px;
+}
 
+.message .messageText-received:after {
+    content: attr(data-time);
+    color: rgba(103, 101, 101, 0.912);
+    position: absolute;
+    line-height: 20px;
+    display: block;
+    bottom: 2px;
+    z-index: 1;
+    font-size: 13px;
+}
+
+.message.sol .messageText-received:after {
+    margin-left: 5px;
+    left: 100%;
+}
+
+.message.sag .messageText-received:after {
+    margin-right: 5px;
+    right: 100%;
+}
+/* // */
+.chat-back {
+    padding: 10px;
+    height: 75vh;
+    background-color: white;
+    overflow-y: scroll;
+    width: 100%;
+    background-repeat: no-repeat;
+  background-size: cover;
+    background-image: url('../../../icons/bg5.jpg'); 
 }
 
 .group-heading {
-  background-color: white;
-  width: 100%;
-  padding: 10px;
-  border: 2px solid rgba(176, 54, 247);
-  cursor: pointer;
+    color: rgb(7, 7, 7);
+    background-color: rgb(246, 234, 253);
+    width: 100%;
+    padding: 15px;
+    cursor: pointer;
 }
 
-#header {
-  position: relative;
-  height: 90%;
-  width: 100%;
-  padding: 8px;
+.chatbg {
+    background-color: white;
 }
 
-#header-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+.button {
+    float: right;
+    border: transparent;
+    outline: transparent;
+    color: white;
+    background-color: red;
+    border-radius: 5px;
 }
 
-.form3 {
-  padding-top: 20px;
+.button-green {
+    float: right;
+    border-radius: 5px;
+    border: transparent;
+    outline: transparent;
+    color: white;
+    background-color: rgb(14, 241, 165);
+}
+
+.list-group {
+    max-height: calc(70vh - 80px);
+    margin-bottom: 10px;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.full-height {
+    /* height: 80vh; */
+    background-color: white;
+}
+
+.row2 {
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+    margin-left: calc(-.5 * var(--bs-gutter-x));
+    background-color: #FFF;
+}
+.rowpad {
+    margin: 5px;
+    cursor: pointer;
+}
+.profile-text {
+    background-color: rgb(229, 206, 243);
+    /* line-height: 40px; */
+    padding: 10px;
+    width: 100%;
+}
+.profile-text-logout {
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
 }

@@ -2,10 +2,11 @@ import ChatContainer from "./index.container"
 import { useDispatch, useSelector } from "react-redux"
 import { getMessages, sendMessage } from '../../../redux/actions/chat-actions';
 
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { io } from "socket.io-client";
 import { deleteGroup, getGroupById, getGroups, nonGroupMembers, saveGroupInfo, updateGroup } from '../../../redux/actions/group-actions';
 import React, { useEffect, useRef, useState } from 'react'
+import { logoutChats } from "../../../redux/actions/user-actions";
 export const host = "http://localhost:5000";
 
 const ChatComponent = () => {
@@ -13,6 +14,7 @@ const ChatComponent = () => {
     const getGroupData = async (e: any) => {
         dispatch(await getGroups(e))
     }
+    const navigate = useNavigate()
     const [searchParams, setSearchParams] = useSearchParams();
     const [allFields, setAllFields] = useState({
         search: '',
@@ -21,7 +23,9 @@ const ChatComponent = () => {
         msg: '',
         id: '',
         messages: [],
-        add: false
+        add: false,
+        group:'',
+        sidebar:'chats'
     })
     // const [chat, setChat] = useState(true);
     // const [search, setSearch] = useState('')
@@ -96,9 +100,9 @@ const ChatComponent = () => {
         console.log("Arrival mesage")
         // arrivalMessage && 
         // setAllFields(
-            
+
         //     {...allFields, messages: (prev: string[]): any => [...prev, arrivalMessage]}
-        
+
         // );
     }, [arrivalMessage]);
 
@@ -116,14 +120,13 @@ const ChatComponent = () => {
         dispatch(await sendMessage({ group: searchParams.get("id"), message: msg }))
         const msgs: any = [...allFields.messages];
         msgs.push({ fromSelf: true, message: msg });
-        setAllFields({ ...allFields, messages: msgs });
+        setAllFields({ ...allFields, messages: msgs, msg: '' });
     };
 
     const sendChat = (event: any) => {
         event.preventDefault();
         if (allFields.msg.length > 0) {
             handleSendMsg(allFields.msg);
-            setAllFields({ ...allFields, msg: '' });
         }
     };
     const updateMembers = async (type: string, ID: string) => {
@@ -146,6 +149,11 @@ const ChatComponent = () => {
         let _id: string = searchParams.get("id") || ''
         setAllFields({ ...allFields, id: _id })
     }, [])
+    const _logoutChats = async() => {
+        dispatch(await logoutChats())
+        localStorage.clear();
+        navigate('/')
+    } 
     return (<ChatContainer
         onSearchChange={onSearchChange}
         seeGroupInfo={seeGroupInfo}
@@ -154,10 +162,12 @@ const ChatComponent = () => {
         messages={allFields.messages}
         updateMembers={updateMembers}
         accordianList={group.groupList}
-        fields={{ search: allFields.search, active: allFields.active, chat: allFields.chat, msg: allFields.msg }}
+        saveGroup={saveGroup}
+        fields={{ search: allFields.search, active: allFields.active, chat: allFields.chat, msg: allFields.msg, group : allFields.group , sidebar: allFields.sidebar}}
         members={data.groupInfo.members}
         nonmembers={data.membersList}
         setFields={setFields}
+        _logoutChats={_logoutChats}
     />)
 }
 export default ChatComponent

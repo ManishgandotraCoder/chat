@@ -33,6 +33,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     enums: [roles.admin, roles.normal]
+  },
+  profile_pic : {
+    type: String,
+    required: false,
   }
 });
 
