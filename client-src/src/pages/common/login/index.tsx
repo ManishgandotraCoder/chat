@@ -34,14 +34,14 @@ const LoginComponentHelper = () => {
         if (localStorage.getItem('user')) {
             let data = JSON.parse(localStorage.getItem('user')!);
             if (data.role === "ADMIN") {
-                navigate('/user')
+                navigate('/dashboard')
             }
             if (data.role === "NORMAL") {
                 navigate('/chat')
             }
         }
         if (user?.userData?._id && user?.userData?.role === "ADMIN") {
-            navigate('/user')
+            navigate('/dashboard')
         }
         if (user?.userData?._id && user?.userData?.role === "NORMAL") {
             navigate('/chat')

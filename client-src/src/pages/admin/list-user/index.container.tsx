@@ -13,7 +13,7 @@ function ListUserComponentHelper({ list, handleSubmit }: listType) {
       <h3 className="add-user">Add User      <Button theme="outline-dark" handleSubmit={handleSubmit} title={'Add User'} /></h3>
       <div className="container">
       
-        <Table striped bordered hover >
+        <Table striped bordered hover  >
           <thead>
             <tr>
               <th>First Name</th>

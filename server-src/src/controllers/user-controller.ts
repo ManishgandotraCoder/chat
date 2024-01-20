@@ -10,7 +10,7 @@ export class UserController {
   async authenticateUser(req: Request, res: Response, next: NextFunction) {
     try {
       const { email, password } = req.body;
-      const user: any = await userModel.findOne({ email, password }).select('-password')
+      const user: any = await userModel.findOne({ email: email.toLowerCase(), password: password }).select('-password')
 
       if (user) {
         var token = await jwt.sign({ _id: user?._id, email: user.email, role: user.role }, values.TOKEN_AUTHENTICATE);
@@ -26,7 +26,7 @@ export class UserController {
     try {
       const { email, password, firstName, lastName, phone, role } = req.body;
       const user: any = await userModel.create({
-        email: email,
+        email: email.toLowerCase(),
         password: password,
         firstName: firstName,
         lastName: lastName,
@@ -89,6 +89,6 @@ export class UserController {
       helper.server_error(res, msg.SERVER_ERROR, JSON.stringify(e))
     }
   }
- 
+
 }
 

@@ -1,130 +1,37 @@
 import { Badge, Col, Form, InputGroup, ListGroup, Row } from 'react-bootstrap'
 import './style.css'
-import React, { useEffect, useRef, useState } from 'react'
 import { chatType } from './index.type';
-import { useSearchParams } from 'react-router-dom';
-import { io } from "socket.io-client";
-import { deleteGroup, getGroupById, getGroups, nonGroupMembers, saveGroupInfo, updateGroup } from '../../../redux/actions/group-actions';
-import { useDispatch, useSelector } from "react-redux";
 import { IoMdSend } from "react-icons/io";
-import { getMessages, sendMessage } from '../../../redux/actions/chat-actions';
 import moment from "moment"
+import { useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-export const host = "http://localhost:5000";
 
-const ChatContainer = ({ accordianList, callGroups }: chatType) => {
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [chat, setChat] = useState(true);
-    const [group, setGroup] = useState('')
-    const [search, setSearch] = useState('')
-
+const ChatContainer = ({ accordianList , onSearchChange , seeGroupInfo , updateMembers, messages , fields , setActiveState, members, sendChat, nonmembers, setFields}: {
+    onSearchChange : Function,
+    seeGroupInfo : Function,
+    updateMembers: Function, 
+    accordianList: [],
+    messages: string[],
+    fields: {
+        search: string,
+        active: string,
+        chat: boolean, 
+        msg: string
+    },
+    setActiveState: Function,
+    members: [],
+    sendChat: Function,
+    nonmembers: [],
+    setFields: Function
+}) => {
     const scrollRef: any = useRef();
-    const [arrivalMessage, setArrivalMessage] = useState({ fromSelf: false, message: '' });
-    const messagesData = useSelector((item: any) => item.message)
-    const data = useSelector((info: any) => info.group)
+    const [searchParams, setSearchParams] = useSearchParams();
 
-    const [messages, setMessages] = useState([]);
-    const [msg, setMsg] = useState("");
-    const [add, setAdd] = useState(false);
-    const [active, setActive] = useState('')
-    const dispatch = useDispatch()
-    const socket: any = useRef();
-    const setActiveState = (name: any) => {
-        setActive(name.name)
-        setSearchParams({ id: name?._id, name: name.name })
-        setChat(true)
-    }
-
-    const saveGroup = async () => {
-        dispatch(await saveGroupInfo(group))
-        dispatch(await getGroups(''))
-        setAdd(!add)
-        setGroup('')
-    }
-    const onSearchChange = async (e: string) => {
-        setSearch(e)
-        callGroups(e)
-    }
-    const deleteGroupFunction = async (id: string) => {
-        await deleteGroup(id)
-        callGroups('')
-    }
-
-    const getData = async () => {
-        dispatch(await getMessages({ group: searchParams.get("id") }))
-    }
-    useEffect(() => {
-
-    }, [accordianList])
-
-
-    useEffect(() => {
-        socket.current?.on("recieve", (msg: any) => {
-            setArrivalMessage({ fromSelf: false, message: msg });
-        });
-    }, []);
-    useEffect(() => {
-        getData()
-        if (searchParams.get('id')) {
-            socket.current = io(host);
-            socket.current.emit("add-user", searchParams.get('id'));
-        }
-        const getCurrentChat = async () => {
-            if (searchParams.get("id")) {
-                await JSON.parse(
-                    localStorage.getItem("user")!
-                )?._id;
-            }
-        };
-        getCurrentChat();
-    }, [searchParams.get("id")])
-
-    useEffect(() => {
-        setMessages(messagesData?.messageList)
-    }, [messagesData?.messageList, messagesData?.messageList?.length])
-
-    useEffect(() => {
-        arrivalMessage && setMessages((prev): any => [...prev, arrivalMessage]);
-    }, [arrivalMessage]);
-
+    const {search} = fields
     useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
-
-    const handleSendMsg = async (msg: any) => {
-
-        socket.current.emit("send-msg", {
-            group: searchParams.get("id"),
-            msg,
-        });
-
-        dispatch(await sendMessage({ group: searchParams.get("id"), message: msg }))
-        const msgs: any = [...messages];
-        msgs.push({ fromSelf: true, message: msg });
-        setMessages(msgs);
-    };
-
-
-
-
-    const sendChat = (event: any) => {
-        event.preventDefault();
-        if (msg.length > 0) {
-            handleSendMsg(msg);
-            setMsg("");
-        }
-    };
-    const updateMembers = async (type: string, ID: string) => {
-        dispatch(await updateGroup(searchParams.get('id')!, type, ID));
-        dispatch(await getGroupById(searchParams.get('id')!))
-        dispatch(await nonGroupMembers(searchParams.get('id')!))
-        callGroups()
-    }
-    const seeGroupInfo = async() => {
-        setChat(false)
-        dispatch(await nonGroupMembers(searchParams.get('id')!))
-        dispatch(await getGroupById(searchParams.get('id')!))
-    }
     return (<>
         <form noValidate className="form">
             <div className="row">
@@ -159,7 +66,7 @@ const ChatContainer = ({ accordianList, callGroups }: chatType) => {
 
                         {accordianList.map((item: any) =>
                             <ListGroup.Item
-                                active={item.name === active}
+                                active={item.name === fields.active}
                                 as="li"
                                 style={{ cursor: 'pointer' }}
                                 onClick={() => setActiveState(item)}
@@ -179,22 +86,22 @@ const ChatContainer = ({ accordianList, callGroups }: chatType) => {
                 <div className="col-md-9 ">
                     <div className='border'>
                         <div className='chatbg'>
-                        <p className='group-heading' onClick={()=>seeGroupInfo()}>{searchParams.get('name')}</p>
-                            {chat &&
+                            <p className='group-heading' onClick={() => seeGroupInfo()}>{searchParams.get('name')}</p>
+                            {fields.chat &&
                                 <>
-                                    
-                                    <div className="chat-back">
+
+                                    <div className="chat-back" >
                                         {messages.map((message: any) =>
                                             <>
                                                 {message.fromSelf ?
 
-                                                    <div className="message sag mtLine">
+                                                    <div ref={scrollRef} className="message sag mtLine">
                                                         <div className="messageText" data-time={moment(message.time).format('HH:MM:SS')}>
                                                             {message.message}
                                                         </div>
                                                         <div className="resim" ></div>
                                                     </div>
-                                                    : <div className="message sol">
+                                                    : <div ref={scrollRef} className="message sol">
                                                         <div className="resim" >
                                                         </div>
                                                         <div className="messageText" data-time={moment(message.time).format('HH:MM:SS')}>
@@ -213,11 +120,11 @@ const ChatContainer = ({ accordianList, callGroups }: chatType) => {
                                             aria-label="Recipient's username"
                                             aria-describedby="basic-addon2"
                                             type="text"
-                                            value={msg}
-                                            onChange={(e) => setMsg(e.target.value)}
+                                            value={fields.msg}
+                                            onChange={(e) => setFields("msg",e.target.value)}
                                         />
-                                        <InputGroup.Text id="basic-addon2">
-                                        <IoMdSend />
+                                        <InputGroup.Text id="basic-addon2" onClick={(e)=>sendChat(e)}>
+                                            <IoMdSend />
                                         </InputGroup.Text>
                                     </InputGroup></> ||
                                 <>
@@ -229,7 +136,7 @@ const ChatContainer = ({ accordianList, callGroups }: chatType) => {
                                     <Row>
                                         <Col className="lister">
                                             <ul className="list-group">
-                                                {data.groupInfo.members?.map((item: any) =>
+                                                {members?.map((item: any) =>
                                                     <li className="list-group-item">
                                                         <div className="ms-2 me-auto">
                                                             <div ><b>{item.userId.firstName} {item.userId.lastName} </b>
@@ -247,7 +154,7 @@ const ChatContainer = ({ accordianList, callGroups }: chatType) => {
                                         </Col>
                                         <Col className="lister">
                                             <ul className="list-group">
-                                                {data.membersList?.map((item: any) =>
+                                                {nonmembers?.map((item: any) =>
                                                     <li className="list-group-item">
                                                         <div className="ms-2 me-auto">
                                                             <div ><b>{item.firstName} {item.lastName} </b>

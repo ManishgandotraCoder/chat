@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { logoutChats } from "../../redux/actions/user-actions"
 import { useDispatch } from 'react-redux';
 import { toolbarType } from './toolbar.type';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+
 function Toolbar({ logout, heading, background }: toolbarType) {
 
     const navigate = useNavigate()
@@ -25,7 +27,13 @@ function Toolbar({ logout, heading, background }: toolbarType) {
                 <Navbar.Brand onClick={() => groupDetails('')}>{heading ? heading : "Select Chat"}</Navbar.Brand>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-
+                        <Nav.Link eventKey={2} onClick={() => navigate('/dashboard')}>
+                            Dashboard
+                        </Nav.Link>
+                        <NavDropdown title="Admin Actions" id="basic-nav-dropdown">
+                            <NavDropdown.Item onClick={() => navigate('/users')}>Users</NavDropdown.Item>
+                           
+                        </NavDropdown>
                     </Nav>
                     <Nav>
                         {logout && <Nav.Link eventKey={3} >
