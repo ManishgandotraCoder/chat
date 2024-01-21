@@ -149,6 +149,7 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
                                                     <div ref={scrollRef} className="message sag mtLine">
                                                         <div className="messageText" data-time={moment(message.time).format('HH:MM:SS')}>
                                                             {message.message}
+                                                            <img className='chat-pic' src={message.profile_pic}/>
                                                         </div>
                                                         <div className="resim" ></div>
                                                     </div>
@@ -156,7 +157,8 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
                                                         <div className="resim" >
                                                         </div>
                                                         <div className="messageText-received" data-time={moment(message.time).format('HH:MM:SS')}>
-                                                            {message.message}
+                                                        <img className='chat-pic' src={message.profile_pic}/>
+                                                        {message.message}
                                                         </div>
                                                     </div>}
 

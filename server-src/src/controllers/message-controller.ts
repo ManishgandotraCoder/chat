@@ -13,13 +13,18 @@ export class MessageController {
                 users: {
                     $in: [new mongoose.Types.ObjectId(group)],
                 },
-            }).sort({ updatedAt: 1 });
+            }).populate('sender').sort({ updatedAt: 1 });
 
             const projectedMessages = messages.map((msg: any) => {
                 return {
-                    fromSelf: msg.sender.toString() === req.user._id.toString(),
+                    fromSelf: msg.sender._id.toString() === req.user._id.toString(),
                     message: msg.message,
-                    time: msg.createdAt
+                    time: msg.createdAt,
+                    firstName : msg?.sender?.firstName,
+                    profile_pic : msg?.sender?.profile_pic,
+                    lastName : msg?.sender?.lastName,
+                    email : msg?.sender?.lastName,
+                    
                 };
             });
             helper.success(res, msg.RECORD_FETCHED_SUCCESSFULLY, projectedMessages)

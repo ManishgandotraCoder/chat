@@ -43,7 +43,7 @@ const Layout: React.FunctionComponent = () => {
 
     }, [])
     return (<div className='bg'>
-        {role === JSON.parse(localStorage.getItem('user')!).role && <Toolbar logout={true} heading={'Speedster'} background="rgba(176, 54, 247)" />}
+        { (JSON.parse(localStorage.getItem('user')!)).role ==='ADMIN' && <Toolbar logout={true} heading={'Speedster'} background="rgba(176, 54, 247)" />}
         <Outlet />
     </div>
     )
