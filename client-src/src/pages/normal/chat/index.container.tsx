@@ -1,4 +1,4 @@
-import {Col, Form, InputGroup, ListGroup, Row } from 'react-bootstrap'
+import { Col, Form, InputGroup, ListGroup, Row } from 'react-bootstrap'
 import './style.css'
 import { IoMdSend } from "react-icons/io";
 import moment from "moment"
@@ -37,7 +37,6 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
     }, [messages]);
 
     useEffect(() => {
-        console.log(fields.group);
 
     }, [fields.group, name])
     return (<>
@@ -52,40 +51,12 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
                     </div>
 
                     {fields.sidebar === 'chats' && <div  >
-
-
                         <ListGroup >
-                            {/* <ListGroup.Item
-                            as="li"
-                            className="d-flex justify-content-between align-items-start">
-                            {add ? <InputGroup className="mb-3">
-                                <Form.Control
-                                    value={group}
-                                    onChange={(e: any) => setGroup(e.target.value)}
-                                    placeholder='Enter group name' />
-                                <InputGroup.Text onClick={() => saveGroup()}><span className="add-group" >Save</span></InputGroup.Text>
-                            </InputGroup>
-                                : <button className="button-green" onClick={() => setAdd(!add)}>Add Group</button>
-
-                            }
-                        </ListGroup.Item> */}
-
-                            {/* <ListGroup.Item
-                            as="li"
-                            className="d-flex justify-content-between align-items-start">
-                            <InputGroup className="mb-3">
-                                <Form.Control
-                                    value={search}
-                                    onChange={(e: any) => onSearchChange(e.target.value)}
-                                    placeholder='Search group name' />
-                            </InputGroup>
-                        </ListGroup.Item> */}
-
-
                             {accordianList.map((item: any) =>
                                 <ListGroup.Item
                                     active={item.name === fields.active}
                                     as="li"
+                                    key={item._id}
                                     style={{ cursor: 'pointer' }}
                                     onClick={() => setActiveState(item)}
                                     className="d-flex justify-content-between align-items-start"
@@ -146,19 +117,19 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
                                             <>
                                                 {message.fromSelf ?
 
-                                                    <div ref={scrollRef} className="message sag mtLine">
+                                                    <div key={message._id} ref={scrollRef} className="message sag mtLine">
                                                         <div className="messageText" data-time={moment(message.time).format('HH:MM:SS')}>
                                                             {message.message}
-                                                            <img className='chat-pic' src={message.profile_pic}/>
+                                                            <img className='chat-pic' src={message.profile_pic} />
                                                         </div>
                                                         <div className="resim" ></div>
                                                     </div>
-                                                    : <div ref={scrollRef} className="message sol">
+                                                    : <div key={message._id} ref={scrollRef} className="message sol">
                                                         <div className="resim" >
                                                         </div>
                                                         <div className="messageText-received" data-time={moment(message.time).format('HH:MM:SS')}>
-                                                        <img className='chat-pic' src={message.profile_pic}/>
-                                                        {message.message}
+                                                            <img className='chat-pic' src={message.profile_pic} />
+                                                            {message.message}
                                                         </div>
                                                     </div>}
 
@@ -178,7 +149,8 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
                                         <Col className="lister">
                                             <ul className="list-group">
                                                 {members?.map((item: any) =>
-                                                    <li className="list-group-item">
+                                                    <li className="list-group-item" key={item._id}
+                                                    >
                                                         <div className="ms-2 me-auto">
                                                             <div ><b>{item.userId.firstName} {item.userId.lastName} </b>
                                                                 <i>
@@ -196,7 +168,7 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
                                         <Col className="lister">
                                             <ul className="list-group">
                                                 {nonmembers?.map((item: any) =>
-                                                    <li className="list-group-item">
+                                                    <li className="list-group-item" key={item._id}>
                                                         <div className="ms-2 me-auto">
                                                             <div ><b>{item.firstName} {item.lastName} </b>
                                                                 <i>

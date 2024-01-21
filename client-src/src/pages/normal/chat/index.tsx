@@ -27,18 +27,13 @@ const ChatComponent = () => {
         group:'',
         sidebar:'chats'
     })
-    // const [chat, setChat] = useState(true);
-    // const [search, setSearch] = useState('')
     const scrollRef: any = useRef();
     const [arrivalMessage, setArrivalMessage] = useState({ fromSelf: false, message: '' });
     const messagesData = useSelector((item: any) => item.message)
     const data = useSelector((info: any) => info.group)
-
-    // const [msg, setMsg] = useState("");
-    // const [add, setAdd] = useState(false);
-    // const [active, setActive] = useState('')
     const dispatch = useDispatch()
     const socket: any = useRef();
+    
     const setActiveState = (name: any) => {
         setAllFields({ ...allFields, active: name.name, chat: true })
         setSearchParams({ id: name?._id, name: name.name })
