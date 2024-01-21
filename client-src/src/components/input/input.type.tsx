@@ -6,5 +6,6 @@ export interface inputComponentType {
     type:string,
     name :string,
     min:number,
-    required: boolean
+    required: boolean,
+    disabled: boolean,
 }

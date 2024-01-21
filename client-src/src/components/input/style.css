@@ -7,7 +7,7 @@
   border-top: none;
   border-left: none;
   border-right: none;
-  background: rgba(200, 242, 245, 0.468);
+  background: rgb(231, 206, 245);
   color: rgb(6, 109, 37);
   outline: none;
 }
@@ -35,7 +35,7 @@
   font-size: 16px;
   padding: 10px;
   width: 30vw;
-  border: 1px solid rgba(176, 54, 247);;
+  border: 1px solid rgba(176, 54, 247);
   border-top: none;
   border-left: none;
   border-right: none;

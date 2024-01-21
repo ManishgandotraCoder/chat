@@ -52,9 +52,9 @@ const ChatComponent = () => {
         });
     }, []);
     const saveGroup = async () => {
-        dispatch(await saveGroupInfo(group))
+        dispatch(await saveGroupInfo(allFields.group))
         dispatch(await getGroups(''))
-        setAllFields({ ...allFields, add: !allFields.add })
+        setAllFields({ ...allFields, add: !allFields.add,  group:'', sidebar:"chats" })
     }
     const onSearchChange = async (e: string) => {
         setAllFields({ ...allFields, search: e })
@@ -157,6 +157,7 @@ const ChatComponent = () => {
     return (<ChatContainer
         onSearchChange={onSearchChange}
         seeGroupInfo={seeGroupInfo}
+        name ={searchParams.get("name")!}
         setActiveState={setActiveState}
         sendChat={sendChat}
         messages={allFields.messages}

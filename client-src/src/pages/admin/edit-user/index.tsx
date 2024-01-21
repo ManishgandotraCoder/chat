@@ -33,7 +33,7 @@ const EditUserComponent = () => {
     }
     const handleSubmit2 = async (event: React.SyntheticEvent<EventTarget>) => {
         event.preventDefault();
-        navigate('/user')
+        navigate('/users')
     }
     const getData = async () => {
         dispatch(await getUserById(ids))

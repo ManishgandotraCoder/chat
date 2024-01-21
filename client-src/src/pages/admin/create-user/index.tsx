@@ -18,7 +18,7 @@ const EditUserComponent = () => {
     useEffect(() => {
         setMessage(user.createMessage)
         if (user.createMessage === 'Record Created successfully') {
-            navigate('/user')
+            navigate('/users')
         }
     }, [user.createMessage])
     const [submit, setSubmit] = useState(false)
@@ -41,7 +41,7 @@ const EditUserComponent = () => {
     }
     const handleSubmit2 = async (event: React.SyntheticEvent<EventTarget>) => {
         event.preventDefault();
-        navigate('/user')
+        navigate('/users')
     }
 
     const changeValues = (id: string, event: React.SyntheticEvent<EventTarget>) => {

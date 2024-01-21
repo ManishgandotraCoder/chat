@@ -1,17 +1,14 @@
-import { Badge, Col, Form, InputGroup, ListGroup, Row } from 'react-bootstrap'
+import {Col, Form, InputGroup, ListGroup, Row } from 'react-bootstrap'
 import './style.css'
 import { IoMdSend } from "react-icons/io";
 import moment from "moment"
 import { useEffect, useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import groupIcon from "../../../icons/group.png"
 import messagesIcon from "../../../icons/messages.jpg"
 import profileIcon from "../../../icons/profile.svg"
+import ButtonComponent from '../../../components/button';
 
-
-import { logoutChats } from '../../../redux/actions/user-actions';
-
-const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupInfo, updateMembers, messages, fields, setActiveState, members, sendChat, nonmembers, setFields, saveGroup }: {
+const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupInfo, updateMembers, messages, fields, setActiveState, members, sendChat, nonmembers, setFields, saveGroup, name }: {
     onSearchChange: Function,
     seeGroupInfo: Function,
     updateMembers: Function,
@@ -31,10 +28,10 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
     nonmembers: [],
     setFields: Function,
     saveGroup: Function,
-    _logoutChats: Function
+    _logoutChats: Function,
+    name: string
 }) => {
     const scrollRef: any = useRef();
-    const [searchParams, setSearchParams] = useSearchParams();
     useEffect(() => {
         scrollRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages]);
@@ -42,7 +39,7 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
     useEffect(() => {
         console.log(fields.group);
 
-    }, [fields.group])
+    }, [fields.group, name])
     return (<>
         <div className='chat'>
 
@@ -105,16 +102,26 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
                         </ListGroup>
                     </div>}
                     {fields.sidebar === 'group' &&
-                        <>
-                        <InputGroup className="mb-3">
-                            <Form.Control
-                                value={fields.group}
-                                onChange={(e) => setFields("group", e.target.value)}
-                                placeholder='Enter group name' />
-                            <InputGroup.Text onClick={() => saveGroup()}><span className="add-group" >Save</span></InputGroup.Text>
-                        </InputGroup>
-                        
-                        </>
+                        <div style={{ padding: "10px" }}>
+
+                            &nbsp;Owner<br />
+                            <InputGroup className="mb-3">
+                                <Form.Control
+                                    disabled
+                                    value={JSON.parse(localStorage.getItem('user')!).firstName + JSON.parse(localStorage.getItem('user')!).lastName}
+                                    placeholder='Enter group name' />
+                                {/* <InputGroup.Text onClick={() => saveGroup()}><span className="add-group" >Save</span></InputGroup.Text> */}
+                            </InputGroup>
+                            &nbsp;Group Name
+                            <InputGroup className="mb-3">
+                                <Form.Control
+                                    value={fields.group}
+                                    onChange={(e) => setFields("group", e.target.value)}
+                                    placeholder='Enter group name' />
+                                {/* <InputGroup.Text onClick={() => saveGroup()}><span className="add-group" >Save</span></InputGroup.Text> */}
+                            </InputGroup>
+                            <ButtonComponent theme="outline-dark" handleSubmit={saveGroup} title={'SAVE'} />
+                        </div>
                     }
                     {fields.sidebar === 'profile' && <>
                         <center><img style={{ height: "150px", width: "150px", borderRadius: "50%", marginTop: "30px" }} src={JSON.parse(localStorage.getItem('user')!).profile_pic || profileIcon} /></center>
@@ -131,7 +138,7 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
                 <div className="col-md-9">
                     <div className='border'>
                         <div className='chatbg'>
-                            <p className='group-heading' onClick={() => seeGroupInfo()}>{searchParams.get('name')}</p>
+                            <p className='group-heading' onClick={() => seeGroupInfo()}>{name}</p>
                             {fields.chat &&
                                 <>
                                     <div className="chat-back" >
