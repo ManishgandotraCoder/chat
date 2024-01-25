@@ -24,32 +24,41 @@ const ChatComponent = () => {
         id: '',
         messages: [],
         add: false,
-        group:'',
-        sidebar:'chats'
+        group: '',
+        sidebar: 'chats'
     })
     const scrollRef: any = useRef();
     const [arrivalMessage, setArrivalMessage] = useState({ fromSelf: false, message: '' });
     const messagesData = useSelector((item: any) => item.message)
     const data = useSelector((info: any) => info.group)
     const dispatch = useDispatch()
-    const socket: any = useRef();
-    
+    const socket = io(host);
+
     const setActiveState = (name: any) => {
         setAllFields({ ...allFields, active: name.name, chat: true })
         setSearchParams({ id: name?._id, name: name.name })
     }
     useEffect(() => {
-        console.log("inndd")
 
-        socket.current?.on("recieve", (msg: any) => {
-            console.log("inn")
-            setArrivalMessage({ fromSelf: false, message: msg });
-        });
+
+        function onFooEvent(value: any) {
+            console.log("onfooo", value);
+
+        }
+        socket.on('foo', onFooEvent);
+
+        return () => {
+            socket.off('foo', onFooEvent);
+        };
+        // socket.current?.on("recieve", (msg: any) => {
+        //     console.log("inn")
+        //     setArrivalMessage({ fromSelf: false, message: msg });
+        // });
     }, []);
     const saveGroup = async () => {
         dispatch(await saveGroupInfo(allFields.group))
         dispatch(await getGroups(''))
-        setAllFields({ ...allFields, add: !allFields.add,  group:'', sidebar:"chats" })
+        setAllFields({ ...allFields, add: !allFields.add, group: '', sidebar: "chats" })
     }
     const onSearchChange = async (e: string) => {
         setAllFields({ ...allFields, search: e })
@@ -70,8 +79,7 @@ const ChatComponent = () => {
 
         getData()
         if (_id) {
-            socket.current = io(host);
-            socket.current.emit("add-user", _id);
+            socket.emit("add-user", _id);
         }
         const getCurrentChat = async () => {
             if (_id) {
@@ -107,11 +115,17 @@ const ChatComponent = () => {
 
     const handleSendMsg = async (msg: any) => {
 
-        socket.current.emit("send-msg", {
-            group: allFields.id,
-            msg,
+        // socket.current.emit("send-msg", {
+        //     group: allFields.id,
+        //     msg,
+        // });
+        socket.emit('foo', {
+                group: allFields.id,
+                msg,
+            }, () => {
+            console.log("in");
+            
         });
-
         dispatch(await sendMessage({ group: searchParams.get("id"), message: msg }))
         const msgs: any = [...allFields.messages];
         msgs.push({ fromSelf: true, message: msg });
@@ -144,22 +158,22 @@ const ChatComponent = () => {
         let _id: string = searchParams.get("id") || ''
         setAllFields({ ...allFields, id: _id })
     }, [])
-    const _logoutChats = async() => {
+    const _logoutChats = async () => {
         dispatch(await logoutChats())
         localStorage.clear();
         navigate('/')
-    } 
+    }
     return (<ChatContainer
         onSearchChange={onSearchChange}
         seeGroupInfo={seeGroupInfo}
-        name ={searchParams.get("name")!}
+        name={searchParams.get("name")!}
         setActiveState={setActiveState}
         sendChat={sendChat}
         messages={allFields.messages}
         updateMembers={updateMembers}
         accordianList={group.groupList}
         saveGroup={saveGroup}
-        fields={{ search: allFields.search, active: allFields.active, chat: allFields.chat, msg: allFields.msg, group : allFields.group , sidebar: allFields.sidebar}}
+        fields={{ search: allFields.search, active: allFields.active, chat: allFields.chat, msg: allFields.msg, group: allFields.group, sidebar: allFields.sidebar }}
         members={data.groupInfo.members}
         nonmembers={data.membersList}
         setFields={setFields}

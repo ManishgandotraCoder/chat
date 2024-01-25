@@ -47,22 +47,24 @@ const io = socket(server, {
 });
 
 global: {
-  var onlineUsers = new Map();
+  var onlineUsers :any= {};
   var chatSocket = ''
 }
-io.on("connection", (socket: any) => {
 
-  chatSocket = socket;
-  socket.on("add-user", (userId: any) => {
-    onlineUsers.set(userId, socket.id);
+
+io.on("connect", (socket: any) => {
+  socket.on("add-user", (namespace: any) => { 
+    onlineUsers[namespace]=true
+    console.log(onlineUsers);
   });
+  
+  socket.on("foo", (data: any) => {
+    console.log(data);
 
-  socket.on("send-msg", (data: any) => {
-    const sendUserSocket = onlineUsers.get(data.group);
+    const sendUserSocket = onlineUsers[data.group]
+    
     if (sendUserSocket) {
-      console.log("Error", data.msg)
-
-      socket.emit("recieve", data.msg);
+      io.emit("foo", data.msg);
     }
   });
 });
