@@ -40,7 +40,6 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
 
     }, [fields.group, name])
     return (<>
-        <div className='chat'>
 
             <div className="row2">
                 <div className="col-md-3 ht">
@@ -107,8 +106,8 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
 
 
                 <div className="col-md-9">
-                    <div className='border'>
-                        <div className='chatbg'>
+                    <div className=''>
+                        <div >
                             <p className='group-heading' onClick={() => seeGroupInfo()}>{name}</p>
                             {fields.chat &&
                                 <>
@@ -222,7 +221,6 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
                 </div>
 
             </footer>
-        </div>
 
     </>)
 }

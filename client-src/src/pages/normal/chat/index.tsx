@@ -120,15 +120,20 @@ const ChatComponent = () => {
         //     msg,
         // });
         socket.emit('foo', {
-                group: allFields.id,
-                msg,
-            }, () => {
+            group: allFields.id,
+            msg,
+        }, () => {
             console.log("in");
-            
+
         });
         dispatch(await sendMessage({ group: searchParams.get("id"), message: msg }))
         const msgs: any = [...allFields.messages];
-        msgs.push({ fromSelf: true, message: msg });
+        msgs.push({
+            fromSelf: true, message: msg,
+            profile_pic: await JSON.parse(
+                localStorage.getItem("user")!
+            )?.profile_pic
+        });
         setAllFields({ ...allFields, messages: msgs, msg: '' });
     };
 

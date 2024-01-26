@@ -3,10 +3,10 @@
 }
 
 .form-login {
-  margin-left: 200px;
-  margin-right: 200px;
+  margin-left: 10%;
+  margin-right: 10%;
   background-color: rgb(255, 255, 255);
-  padding: 50px;
+  padding: 20px;
 }
 
 .bg2 {
@@ -20,5 +20,5 @@
 }
 
 .add-user {
-  margin-left: 15px;
+  text-align: center;
 }

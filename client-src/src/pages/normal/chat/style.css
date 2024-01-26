@@ -1,20 +1,18 @@
-html, body {margin: 0; height: 100%; overflow: hidden}
+
+
 .footer {
     background-color: rgb(229, 206, 243);
     position: fixed;
-    width: calc(100% - 40px);
+    width: calc(100%);
     padding: 10px;
     color: white;
     font-size: 25px;
-    bottom: 20px;
-}   
-
-.chat {
-    padding: 20px;
+    bottom: 0;
 }
 
+
 .ht {
-    height: 88.6vh;
+    height: 100vh;
     background-color: white;
 }
 
@@ -142,6 +140,7 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     margin-right: 5px;
     right: 100%;
 }
+
 /* received */
 
 .message .messageText-received {
@@ -152,7 +151,7 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     position: relative;
     line-height: 20px;
     max-width: 80%;
-    
+
     padding: 10px;
 }
 
@@ -217,16 +216,17 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     margin-right: 5px;
     right: 100%;
 }
+
 /* // */
 .chat-back {
     padding: 10px;
-    height: 75vh;
+    height: calc(100vh - 118px);
     background-color: white;
     overflow-y: scroll;
     width: 100%;
     background-repeat: no-repeat;
-  background-size: cover;
-    background-image: url('../../../icons/bg5.jpg'); 
+    background-size: cover;
+    background-image: url('../../../icons/bg5.jpg');
 }
 
 .group-heading {
@@ -237,9 +237,7 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     cursor: pointer;
 }
 
-.chatbg {
-    background-color: white;
-}
+
 
 .button {
     float: right;
@@ -280,21 +278,26 @@ html, body {margin: 0; height: 100%; overflow: hidden}
     margin-left: calc(-.5 * var(--bs-gutter-x));
     background-color: #FFF;
 }
+
 .rowpad {
-    margin: 5px;
+    padding: 5px;
     cursor: pointer;
+    background-color: rgb(246, 234, 253);
 }
+
 .profile-text {
     background-color: rgb(229, 206, 243);
     /* line-height: 40px; */
     padding: 10px;
     width: 100%;
 }
+
 .profile-text-logout {
     padding: 10px;
     width: 100%;
     cursor: pointer;
 }
+
 .chat-pic {
     width: 30px;
     margin-right: 10px;

@@ -55,11 +55,10 @@ global: {
 io.on("connect", (socket: any) => {
   socket.on("add-user", (namespace: any) => { 
     onlineUsers[namespace]=true
-    console.log(onlineUsers);
   });
   
   socket.on("foo", (data: any) => {
-    console.log(data);
+    console.log(data.group);
 
     const sendUserSocket = onlineUsers[data.group]
     
