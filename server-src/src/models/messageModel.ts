@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const MessageSchema = mongoose.Schema(
   {
-    message:  { type: String, required: true },
-    
+    message: { type: String, required: true },
+
     users: Array,
     sender: {
       type: mongoose.Schema.Types.ObjectId,
@@ -13,6 +13,11 @@ const MessageSchema = mongoose.Schema(
     createdAt: {
       type: "Date",
       default: new Date()
+    },
+    type: {
+      type: "String",
+      default: "MESSAGES",
+      enums: ["MESSAGES", "CREATED","USER_ADDED","USER_REMOVED"]
     }
   },
   {

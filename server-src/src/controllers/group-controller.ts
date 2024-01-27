@@ -3,6 +3,9 @@ import { msg } from "../helpers/messages"
 import groupModel from "../models/groupModel";
 import { Response, Request, NextFunction } from "express";
 import userModel from '../models/userModel';
+import mongoose from "mongoose";
+
+const Messages = require("../models/messageModel");
 
 export class GroupController {
     async getGroups(req: Request, res: Response, next: NextFunction) {
@@ -14,8 +17,6 @@ export class GroupController {
                 filter.name = { '$regex': search ? search : '', '$options': 'i' }
 
             }
-            console.log(filter);
-
             const user: any = await groupModel
                 .find(filter)
                 .populate('members.userId', ' firstName lastName');
@@ -29,7 +30,7 @@ export class GroupController {
             helper.server_error(res, msg.SERVER_ERROR, JSON.stringify(e))
         }
     }
-    async createGroup(req: Request, res: Response, next: NextFunction) {
+    async createGroup(req: any, res: Response, next: NextFunction) {
         try {
             const { name } = req.body;
             const groupInfo: any = req.user
@@ -40,6 +41,12 @@ export class GroupController {
                 name: name,
                 members: [{ userId: groupInfo?._id }]
             })
+            await Messages.create({
+                message: req.user.firstName + ' Created Group',
+                users: [new mongoose.Types.ObjectId(group._id), new mongoose.Types.ObjectId(req.user._id)],
+                sender: groupInfo?._id,
+                type: "CREATED"
+            });
             if (group) {
                 helper.success(res, msg.RECORD_CREATED_SUCCESSFULLY, group)
             } else {
@@ -49,7 +56,7 @@ export class GroupController {
             helper.server_error(res, msg.SERVER_ERROR, JSON.stringify(e))
         }
     }
-    async updateGroup(req: Request, res: Response, next: NextFunction) {
+    async updateGroup(req: any, res: Response, next: NextFunction) {
         try {
             let filter: any = {
                 name: req.body.name
@@ -66,6 +73,22 @@ export class GroupController {
                 )
                 .select('-password');
 
+            if (req.body.type === 'add') {
+                await Messages.create({
+                    message: req.user.firstName + ' Added 1 member to group',
+                    users: [new mongoose.Types.ObjectId(req.params.id), new mongoose.Types.ObjectId(req.user._id)],
+                    sender: req.user._id,
+                    type: "USER_ADDED"
+                });
+            }
+            if (req.body.type === 'rem') {
+                await Messages.create({
+                    message: req.user.firstName + ' Removed 1 member from group',
+                    users: [new mongoose.Types.ObjectId(req.params.id), new mongoose.Types.ObjectId(req.user._id)],
+                    sender: req.user._id,
+                    type: "USER_REMOVED"
+                });
+            }
             if (user) {
                 helper.success(res, msg.RECORD_UPDATED_SUCCESSFULLY, null)
             } else {

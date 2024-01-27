@@ -24,7 +24,8 @@ export class MessageController {
                     profile_pic : msg?.sender?.profile_pic,
                     lastName : msg?.sender?.lastName,
                     email : msg?.sender?.lastName,
-                    _id: msg.sender._id
+                    _id: msg.sender._id,
+                    type :msg.type
                 };
             });
             helper.success(res, msg.RECORD_FETCHED_SUCCESSFULLY, projectedMessages)

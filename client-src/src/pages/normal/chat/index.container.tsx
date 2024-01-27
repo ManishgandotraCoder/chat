@@ -41,16 +41,18 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
     }, [fields.group, name])
     return (<>
 
-            <div className="row2">
-                <div className="col-md-3 ht">
-                    <div className="row2 rowpad">
-                        <img onClick={() => setFields('sidebar', 'profile')} style={{ height: "45px", width: "45px", borderRadius: "50px", }} src={JSON.parse(localStorage.getItem('user')!).profile_pic || profileIcon} />
-                        <img onClick={() => setFields('sidebar', 'chats')} style={{ height: "45px", marginLeft: "10px", padding: "5px" }} src={messagesIcon} />
-                        <img onClick={() => setFields('sidebar', 'group')} style={{ height: "40px", marginLeft: "10px", padding: "5px" }} src={groupIcon} />
-                    </div>
-
-                    {fields.sidebar === 'chats' && <div  >
+        <div className="row2">
+            <div className="col-md-3 ">
+                <div className="row2 rowpad">
+                    <img onClick={() => setFields('sidebar', 'profile')} style={{ height: "45px", width: "45px", borderRadius: "50px", }} src={JSON.parse(localStorage.getItem('user')!).profile_pic || profileIcon} />
+                    <img onClick={() => setFields('sidebar', 'chats')} style={{ height: "45px", marginLeft: "10px", padding: "5px" }} src={messagesIcon} />
+                    <img onClick={() => setFields('sidebar', 'group')} style={{ height: "40px", marginLeft: "10px", padding: "5px" }} src={groupIcon} />
+                </div>
+                <span className='header-side-nav'>{fields.sidebar}</span>
+                {fields.sidebar === 'chats' && <div  >
+                        
                         <ListGroup >
+
                             {accordianList.map((item: any) =>
                                 <ListGroup.Item
                                     active={item.name === fields.active}
@@ -70,157 +72,162 @@ const ChatContainer = ({ _logoutChats, accordianList, onSearchChange, seeGroupIn
                                 </ListGroup.Item>)}
 
                         </ListGroup>
-                    </div>}
-                    {fields.sidebar === 'group' &&
-                        <div style={{ padding: "10px" }}>
+                </div>}
+                {fields.sidebar === 'group' && <div style={{ padding: "10px" }}>
 
-                            &nbsp;Owner<br />
-                            <InputGroup className="mb-3">
-                                <Form.Control
-                                    disabled
-                                    value={JSON.parse(localStorage.getItem('user')!).firstName + JSON.parse(localStorage.getItem('user')!).lastName}
-                                    placeholder='Enter group name' />
-                                {/* <InputGroup.Text onClick={() => saveGroup()}><span className="add-group" >Save</span></InputGroup.Text> */}
-                            </InputGroup>
-                            &nbsp;Group Name
-                            <InputGroup className="mb-3">
-                                <Form.Control
-                                    value={fields.group}
-                                    onChange={(e) => setFields("group", e.target.value)}
-                                    placeholder='Enter group name' />
-                                {/* <InputGroup.Text onClick={() => saveGroup()}><span className="add-group" >Save</span></InputGroup.Text> */}
-                            </InputGroup>
-                            <ButtonComponent theme="outline-dark" handleSubmit={saveGroup} title={'SAVE'} />
-                        </div>
-                    }
-                    {fields.sidebar === 'profile' && <>
-                        <center><img style={{ height: "150px", width: "150px", borderRadius: "50%", marginTop: "30px" }} src={JSON.parse(localStorage.getItem('user')!).profile_pic || profileIcon} /></center>
-                        <center>{JSON.parse(localStorage.getItem('user')!).firstName} {JSON.parse(localStorage.getItem('user')!).lastName}</center>
-                        <center className='profile-text'>Email : {JSON.parse(localStorage.getItem('user')!).email}</center>
-                        <center className='profile-text'>Phone Number : {JSON.parse(localStorage.getItem('user')!).phone}</center>
+                        &nbsp;Owner<br />
+                        <InputGroup className="mb-3">
+                            <Form.Control
+                                disabled
+                                value={JSON.parse(localStorage.getItem('user')!).firstName + JSON.parse(localStorage.getItem('user')!).lastName}
+                                placeholder='Enter group name' />
+                            {/* <InputGroup.Text onClick={() => saveGroup()}><span className="add-group" >Save</span></InputGroup.Text> */}
+                        </InputGroup>
+                        &nbsp;Group Name
+                        <InputGroup className="mb-3">
+                            <Form.Control
+                                value={fields.group}
+                                onChange={(e) => setFields("group", e.target.value)}
+                                placeholder='Enter group name' />
+                            {/* <InputGroup.Text onClick={() => saveGroup()}><span className="add-group" >Save</span></InputGroup.Text> */}
+                        </InputGroup>
+                        <ButtonComponent theme="outline-dark" handleSubmit={saveGroup} title={'SAVE'} />
+                </div>}
+                {fields.sidebar === 'profile' && <>
+                    <center><img style={{ height: "150px", width: "150px", borderRadius: "50%", marginTop: "30px" }} src={JSON.parse(localStorage.getItem('user')!).profile_pic || profileIcon} /></center>
+                    <center>{JSON.parse(localStorage.getItem('user')!).firstName} {JSON.parse(localStorage.getItem('user')!).lastName}</center>
+                    <center className='profile-text'>Email : {JSON.parse(localStorage.getItem('user')!).email}</center>
+                    <center className='profile-text'>Phone Number : {JSON.parse(localStorage.getItem('user')!).phone}</center>
 
-                        <center className='profile-text-logout' onClick={() => _logoutChats()}>Logout</center>
-                    </>}
+                    <center className='profile-text-logout' onClick={() => _logoutChats()}>Logout</center>
+                </>}
 
-                </div>
+            </div>
 
 
-                <div className="col-md-9">
-                    <div className=''>
-                        <div >
-                            <p className='group-heading' onClick={() => seeGroupInfo()}>{name}</p>
-                            {fields.chat &&
-                                <>
-                                    <div className="chat-back" >
-                                        {messages.map((message: any) =>
-                                            <>
-                                                {message.fromSelf ?
-
-                                                    <div key={message._id} ref={scrollRef} className="message sag mtLine">
-                                                        <div className="messageText" data-time={moment(message.time).format('HH:MM:SS')}>
-                                                            {message.message}
-                                                            <img className='chat-pic' src={message.profile_pic} />
-                                                        </div>
-                                                        <div className="resim" ></div>
-                                                    </div>
-                                                    : <div key={message._id} ref={scrollRef} className="message sol">
-                                                        <div className="resim" >
-                                                        </div>
-                                                        <div className="messageText-received" data-time={moment(message.time).format('HH:MM:SS')}>
-                                                            <img className='chat-pic' src={message.profile_pic} />
-                                                            {message.message}
-                                                        </div>
-                                                    </div>}
-
-
-                                            </>
-                                        )}
-
-                                    </div>
-                                </> ||
+            <div className="col-md-9">
+                <div className=''>
+                    <div >
+                        <p className='group-heading' onClick={() => seeGroupInfo()}>{name}</p>
+                        {fields.chat &&
+                            <>
                                 <div className="chat-back" >
-                                    <Row>
-                                        <Col className="col-text">Group Members</Col>
-                                        <Col className="col-text">Add Members to Group</Col>
+                                    {messages.map((message: any) =>
+                                        <>
+                                            {message.type === "MESSAGES" ? (message.fromSelf ?
 
-                                    </Row>
-                                    <Row>
-                                        <Col className="lister">
-                                            <ul className="list-group">
-                                                {members?.map((item: any) =>
-                                                    <li className="list-group-item" key={item._id}
-                                                    >
-                                                        <div className="ms-2 me-auto">
-                                                            <div ><b>{item.userId.firstName} {item.userId.lastName} </b>
-                                                                <i>
-                                                                    ( {item.userId.email} )
-                                                                </i>
-                                                                <button className="button" onClick={() => updateMembers('rem', item?.userId?._id)}>Remove</button>
-                                                            </div>
-                                                            {item.email}
+                                                <div key={message._id} ref={scrollRef} className="message sag mtLine">
+                                                    <div className="messageText" data-time={moment(message.time).format('HH:MM:SS')}>
+                                                        {message.message}
+                                                        <img className='chat-pic' src={message.profile_pic} />
+                                                    </div>
+                                                    <div className="resim" ></div>
+                                                </div>
+                                                : <div key={message._id} ref={scrollRef} className="message sol">
+                                                    <div className="resim" >
+                                                    </div>
+                                                    <div className="messageText-received" data-time={moment(message.time).format('HH:MM:SS')}>
+                                                        <img className='chat-pic' src={message.profile_pic} />
+                                                        {message.message}
+                                                    </div>
+                                                </div>) :
+                                                <div key={message._id} ref={scrollRef} className="message_center">
+                                                    <div className="messageText">
+                                                        {message.message + ' on ' + moment(message.time).format('HH:MM:SS')}
+
+                                                    </div>
+
+                                                </div>}
+
+
+                                        </>
+                                    )}
+
+                                </div>
+                            </> ||
+                            <div className="chat-back" >
+                                <Row>
+                                    <Col className="col-text">Group Members</Col>
+                                    <Col className="col-text">Add Members to Group</Col>
+
+                                </Row>
+                                <Row>
+                                    <Col className="lister">
+                                        <ul className="list-group">
+                                            {members?.map((item: any) =>
+                                                <li className="list-group-item" key={item._id}
+                                                >
+                                                    <div className="ms-2 me-auto">
+                                                        <div ><b>{item.userId.firstName} {item.userId.lastName} </b>
+                                                            <i>
+                                                                ( {item.userId.email} )
+                                                            </i>
+                                                            <button className="button" onClick={() => updateMembers('rem', item?.userId?._id)}>Remove</button>
                                                         </div>
-                                                    </li>
-                                                )}
-                                            </ul>
+                                                        {item.email}
+                                                    </div>
+                                                </li>
+                                            )}
+                                        </ul>
 
-                                        </Col>
-                                        <Col className="lister">
-                                            <ul className="list-group">
-                                                {nonmembers?.map((item: any) =>
-                                                    <li className="list-group-item" key={item._id}>
-                                                        <div className="ms-2 me-auto">
-                                                            <div ><b>{item.firstName} {item.lastName} </b>
-                                                                <i>
-                                                                    ( {item.email} )
-                                                                </i>
-                                                                <button className="button-green" onClick={() => updateMembers('add', item?._id)}>Add</button>
-                                                            </div>
+                                    </Col>
+                                    <Col className="lister">
+                                        <ul className="list-group">
+                                            {nonmembers?.map((item: any) =>
+                                                <li className="list-group-item" key={item._id}>
+                                                    <div className="ms-2 me-auto">
+                                                        <div ><b>{item.firstName} {item.lastName} </b>
+                                                            <i>
+                                                                ( {item.email} )
+                                                            </i>
+                                                            <button className="button-green" onClick={() => updateMembers('add', item?._id)}>Add</button>
                                                         </div>
+                                                    </div>
 
-                                                    </li>
-                                                )}
-                                            </ul>
-                                        </Col>
-                                    </Row>
-                                </div>}
-                        </div>
+                                                </li>
+                                            )}
+                                        </ul>
+                                    </Col>
+                                </Row>
+                            </div>}
                     </div>
                 </div>
             </div>
-            <footer className="footer">
-                <div className="row2">
-                    <div className="col-md-3">
-                        <InputGroup>
-                            <Form.Control
-                                value={fields.search}
-                                onChange={(e: any) => onSearchChange(e.target.value)}
-                                placeholder='Search ' />
-                        </InputGroup>
+        </div>
+        <footer className="footer">
+            <div className="row2">
+                <div className="col-md-3">
+                    <InputGroup>
+                        <Form.Control
+                            value={fields.search}
+                            onChange={(e: any) => onSearchChange(e.target.value)}
+                            placeholder='Search ' />
+                    </InputGroup>
 
-                    </div>
-                    <div className="col-md-9">
-                        <InputGroup >
-                            <Form.Control
-                                placeholder="Type your message"
-                                aria-label="Recipient's username"
-                                aria-describedby="basic-addon2"
-                                type="text"
-                                value={fields.msg}
-                                onKeyDown={(e) => {
-                                    if (e.keyCode === 13) {
-                                        sendChat(e)
-                                    }
-                                }}
-                                onChange={(e) => setFields("msg", e.target.value)}
-                            />
-                            <InputGroup.Text id="basic-addon2" onClick={(e) => sendChat(e)}>
-                                <IoMdSend />
-                            </InputGroup.Text>
-                        </InputGroup>
-                    </div>
                 </div>
+                <div className="col-md-9">
+                    <InputGroup >
+                        <Form.Control
+                            placeholder="Type your message"
+                            aria-label="Recipient's username"
+                            aria-describedby="basic-addon2"
+                            type="text"
+                            value={fields.msg}
+                            onKeyDown={(e) => {
+                                if (e.keyCode === 13) {
+                                    sendChat(e)
+                                }
+                            }}
+                            onChange={(e) => setFields("msg", e.target.value)}
+                        />
+                        <InputGroup.Text id="basic-addon2" onClick={(e) => sendChat(e)}>
+                            <IoMdSend />
+                        </InputGroup.Text>
+                    </InputGroup>
+                </div>
+            </div>
 
-            </footer>
+        </footer>
 
     </>)
 }
